@@ -1,0 +1,1085 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StoreDz - ستور ديزاد</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Cairo', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        header {
+            background: linear-gradient(90deg, #1a3a6d 0%, #2c5282 100%);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+            transform: rotate(30deg);
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .logo i {
+            font-size: 2.8rem;
+            color: #ffd700;
+        }
+        
+        header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        header p {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+        
+        @media (max-width: 992px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid #eaeaea;
+        }
+        
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .card h2 {
+            color: #1a3a6d;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #2c5282;
+            display: flex;
+            align-items: center;
+            font-size: 1.8rem;
+        }
+        
+        .card h2 i {
+            margin-left: 12px;
+            background: #2c5282;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 700;
+            color: #1a3a6d;
+            font-size: 1.1rem;
+        }
+        
+        select, input, textarea {
+            width: 100%;
+            padding: 14px 18px;
+            border: 2px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s;
+            background: #f9fafb;
+        }
+        
+        select:focus, input:focus, textarea:focus {
+            border-color: #3b82f6;
+            outline: none;
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15);
+            background: white;
+        }
+        
+        .location-selectors {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+        
+        @media (max-width: 768px) {
+            .location-selectors {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .delivery-options {
+            display: flex;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        @media (max-width: 576px) {
+            .delivery-options {
+                flex-direction: column;
+            }
+        }
+        
+        .delivery-option {
+            flex: 1;
+            text-align: center;
+            padding: 20px;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .delivery-option:hover {
+            border-color: #3b82f6;
+            background: #eff6ff;
+        }
+        
+        .delivery-option.selected {
+            border-color: #3b82f6;
+            background: linear-gradient(to bottom, #eff6ff, #dbeafe);
+            transform: translateY(-5px);
+        }
+        
+        .delivery-option i {
+            font-size: 32px;
+            margin-bottom: 15px;
+            color: #1d4ed8;
+            background: #dbeafe;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+        }
+        
+        .delivery-option h3 {
+            font-size: 1.3rem;
+            margin-bottom: 8px;
+            color: #1e3a8a;
+        }
+        
+        .delivery-option p {
+            color: #4b5563;
+            font-size: 0.95rem;
+        }
+        
+        /* قسم المنتجات */
+        .products-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+        
+        .product-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            border: 1px solid #e5e7eb;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+        }
+        
+        .product-image {
+            height: 180px;
+            background: linear-gradient(45deg, #6b7280, #9ca3af);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+        }
+        
+        .product-info {
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .product-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #1e3a8a;
+            margin-bottom: 10px;
+        }
+        
+        .product-price {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #1a3a6d;
+            margin: 10px 0;
+        }
+        
+        .product-quantity {
+            display: flex;
+            align-items: center;
+            margin: 15px 0;
+        }
+        
+        .product-quantity input {
+            width: 70px;
+            text-align: center;
+            margin: 0 10px;
+            padding: 8px;
+        }
+        
+        .btn {
+            background: linear-gradient(90deg, #1a3a6d 0%, #2c5282 100%);
+            color: white;
+            border: none;
+            padding: 14px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 700;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .btn:hover {
+            opacity: 0.92;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-add {
+            background: linear-gradient(90deg, #166534 0%, #22c55e 100%);
+        }
+        
+        .btn-remove {
+            background: linear-gradient(90deg, #991b1b 0%, #ef4444 100%);
+            padding: 10px 16px;
+            font-size: 14px;
+        }
+        
+        .btn-admin {
+            background: linear-gradient(90deg, #7e22ce 0%, #a855f7 100%);
+        }
+        
+        .products-table {
+            overflow-x: auto;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            min-width: 600px;
+        }
+        
+        th, td {
+            padding: 15px 18px;
+            text-align: center;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        
+        th {
+            background-color: #1a3a6d;
+            color: white;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f9fafb;
+        }
+        
+        tr:hover {
+            background-color: #eff6ff;
+        }
+        
+        tfoot td {
+            font-weight: 800;
+            font-size: 1.2rem;
+            background-color: #dbeafe;
+            color: #1a3a6d;
+        }
+        
+        .actions {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 40px;
+        }
+        
+        .btn-submit {
+            background: linear-gradient(90deg, #166534 0%, #22c55e 100%);
+            flex: 1;
+            max-width: 300px;
+            padding: 18px;
+            font-size: 1.2rem;
+        }
+        
+        .btn-reset {
+            background: linear-gradient(90deg, #4b5563 0%, #9ca3af 100%);
+            flex: 1;
+            max-width: 300px;
+            padding: 18px;
+            font-size: 1.2rem;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 30px;
+            color: #4b5563;
+            border-top: 1px solid #e5e7eb;
+            background: #f9fafb;
+            border-radius: 15px;
+        }
+        
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .creator-info {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        
+        .creator-info a {
+            color: #1d4ed8;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .creator-info a:hover {
+            color: #1a3a6d;
+            text-decoration: underline;
+        }
+        
+        .copyright {
+            font-size: 1.1rem;
+            color: #6b7280;
+        }
+        
+        .notification {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            padding: 20px 30px;
+            border-radius: 12px;
+            background: linear-gradient(90deg, #166534 0%, #22c55e 100%);
+            color: white;
+            font-weight: 600;
+            font-size: 1.1rem;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            transform: translateX(150%);
+            transition: transform 0.5s ease;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .notification.show {
+            transform: translateX(0);
+        }
+        
+        .notification.error {
+            background: linear-gradient(90deg, #991b1b 0%, #ef4444 100%);
+        }
+        
+        .admin-panel {
+            background: #fffbeb;
+            border: 2px dashed #fbbf24;
+            border-radius: 15px;
+            padding: 25px;
+            margin-top: 30px;
+        }
+        
+        .admin-panel h3 {
+            color: #b45309;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .new-product-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr auto;
+            gap: 15px;
+        }
+        
+        @media (max-width: 768px) {
+            .new-product-form {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .product-actions {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 15px;
+        }
+        
+        .admin-toggle {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: #7e22ce;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            z-index: 10;
+        }
+        
+        .highlight {
+            animation: highlight 2s ease;
+        }
+        
+        @keyframes highlight {
+            0% { background-color: #fffbeb; }
+            50% { background-color: #fef3c7; }
+            100% { background-color: #fffbeb; }
+        }
+        
+        .loading-spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+            margin-right: 10px;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <button class="admin-toggle" id="adminToggle">
+            <i class="fas fa-cog"></i>
+        </button>
+        
+        <header>
+            <div class="logo">
+                <i class="fas fa-store"></i>
+                <h1>StoreDz - ستور ديزاد</h1>
+            </div>
+            <p>تأكيد طلبياتك بسهولة مع التوصيل لجميع أنحاء الجزائر</p>
+        </header>
+        
+        <div class="main-content">
+            <!-- معلومات العميل والموقع -->
+            <div class="card">
+                <h2><i class="fas fa-user"></i> معلومات العميل</h2>
+                
+                <div class="form-group">
+                    <label for="firstName">الاسم</label>
+                    <input type="text" id="firstName" placeholder="أدخل اسمك" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="lastName">اللقب</label>
+                    <input type="text" id="lastName" placeholder="أدخل لقبك" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="phone">رقم الهاتف</label>
+                    <input type="tel" id="phone" placeholder="أدخل رقم هاتفك" required>
+                </div>
+                
+                <h2><i class="fas fa-map-marker-alt"></i> الموقع</h2>
+                
+                <div class="location-selectors">
+                    <div class="form-group">
+                        <label for="state">الولاية</label>
+                        <select id="state" required>
+                            <option value="">اختر الولاية</option>
+                            <!-- سيتم ملء الولايات هنا ديناميكيًا -->
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="commune">البلدية</label>
+                        <input type="text" id="commune" placeholder="أدخل اسم البلدية" required>
+                    </div>
+                </div>
+                
+                <h2><i class="fas fa-truck"></i> خيارات التوصيل</h2>
+                
+                <div class="delivery-options">
+                    <div class="delivery-option selected" id="office-delivery">
+                        <i class="fas fa-building"></i>
+                        <h3>التوصيل إلى مكتب الولاية</h3>
+                        <p>استلام الطلبية من المكتب الرئيسي</p>
+                    </div>
+                    <div class="delivery-option" id="home-delivery">
+                        <i class="fas fa-home"></i>
+                        <h3>التوصيل إلى المنزل</h3>
+                        <p>توصيل الطلبية إلى عنوانك</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- إدارة المنتجات -->
+            <div class="card">
+                <h2><i class="fas fa-boxes"></i> المنتجات المتاحة</h2>
+                
+                <div class="products-section" id="productsSection">
+                    <!-- سيتم إضافة المنتجات هنا ديناميكيًا -->
+                </div>
+                
+                <div class="admin-panel" id="adminPanel" style="display:none;">
+                    <h3><i class="fas fa-lock"></i> لوحة الإدارة - إضافة منتج جديد</h3>
+                    
+                    <div class="new-product-form">
+                        <input type="text" id="newProductName" placeholder="اسم المنتج الجديد">
+                        <input type="number" id="newProductPrice" placeholder="السعر (دج)" min="0" step="0.01">
+                        <button class="btn btn-admin" id="addNewProduct"><i class="fas fa-plus"></i> إضافة منتج</button>
+                    </div>
+                    
+                    <div class="product-actions">
+                        <button class="btn btn-remove" id="resetProducts"><i class="fas fa-sync"></i> إعادة تعيين المنتجات</button>
+                    </div>
+                </div>
+                
+                <h2 style="margin-top: 30px;"><i class="fas fa-receipt"></i> تفاصيل الطلبية</h2>
+                
+                <div class="products-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>المنتج</th>
+                                <th>الكمية</th>
+                                <th>السعر</th>
+                                <th>المجموع</th>
+                                <th>إجراءات</th>
+                            </tr>
+                        </thead>
+                        <tbody id="productsList">
+                            <!-- سيتم إضافة المنتجات المختارة هنا ديناميكيًا -->
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="3" style="text-align: left;">المجموع الإجمالي</td>
+                                <td id="totalAmount">0.00 دج</td>
+                                <td></td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+                
+                <div class="form-group" style="margin-top: 25px;">
+                    <label for="notes">ملاحظات إضافية</label>
+                    <textarea id="notes" rows="3" placeholder="أي ملاحظات أو تعليمات إضافية"></textarea>
+                </div>
+            </div>
+        </div>
+        
+        <div class="actions">
+            <button class="btn btn-reset" id="resetBtn"><i class="fas fa-redo"></i> إعادة تعيين</button>
+            <button class="btn btn-submit" id="submitBtn"><i class="fas fa-check-circle"></i> تأكيد الطلبية</button>
+        </div>
+        
+        <footer>
+            <div class="footer-content">
+                <div class="creator-info">
+                    تم التطوير بواسطة: <span>ANOUAR ANNABI</span> | 
+                    البريد الإلكتروني: <a href="mailto:anouar.annabi.dz@gmail.com">anouar.annabi.dz@gmail.com</a>
+                </div>
+                <div class="copyright">
+                    StoreDz - ستور ديزاد © 2025 | نظام متكامل لإدارة الطلبيات
+                </div>
+            </div>
+        </footer>
+        
+        <div class="notification" id="notification">
+            <i class="fas fa-check-circle"></i>
+            <span>تم إرسال طلبك بنجاح!</span>
+        </div>
+    </div>
+
+    <script>
+        // قائمة الولايات الجزائرية مع أرقامها الرسمية
+        const algerianStates = [
+            "01 - أدرار", "02 - الشلف", "03 - الأغواط", "04 - أم البواقي", "05 - باتنة",
+            "06 - بجاية", "07 - بسكرة", "08 - بشار", "09 - البليدة", "10 - البويرة",
+            "11 - تمنراست", "12 - تبسة", "13 - تلمسان", "14 - تيارت", "15 - تيزي وزو",
+            "16 - الجزائر", "17 - الجلفة", "18 - جيجل", "19 - سطيف", "20 - سعيدة",
+            "21 - سكيكدة", "22 - سيدي بلعباس", "23 - عنابة", "24 - قالمة", "25 - قسنطينة",
+            "26 - المدية", "27 - مستغانم", "28 - المسيلة", "29 - معسكر", "30 - ورقلة",
+            "31 - وهران", "32 - البيض", "33 - إيليزي", "34 - برج بوعريريج", "35 - بومرداس",
+            "36 - الطارف", "37 - تندوف", "38 - تيسمسيلت", "39 - الوادي", "40 - خنشلة",
+            "41 - سوق أهراس", "42 - تيبازة", "43 - ميلة", "44 - عين الدفلى", "45 - النعامة",
+            "46 - عين تموشنت", "47 - غرداية", "48 - غليزان", "49 - تيميمون", "50 - برج باجي مختار",
+            "51 - أولاد جلال", "52 - بني عباس", "53 - عين صالح", "54 - عين قزام", "55 - تقرت",
+            "56 - جانت", "57 - المغير", "58 - المنيعة"
+        ];
+
+        // قائمة أيقونات للمنتجات
+        const icons = [
+            "fa-mobile-alt", "fa-laptop", "fa-headphones", "fa-tv", "fa-camera",
+            "fa-gamepad", "fa-tablet-alt", "fa-watch", "fa-keyboard", "fa-mouse"
+        ];
+        
+        // قائمة المنتجات الافتراضية
+        let availableProducts = [
+            { id: 1, name: "هاتف ذكي", price: 25000, icon: "fa-mobile-alt" },
+            { id: 2, name: "لابتوب", price: 65000, icon: "fa-laptop" },
+            { id: 3, name: "سماعات", price: 5000, icon: "fa-headphones" },
+            { id: 4, name: "شاشة تلفزيون", price: 45000, icon: "fa-tv" }
+        ];
+        
+        // متغيرات التطبيق
+        let products = [];
+        let deliveryType = "office";
+        let totalAmount = 0;
+        
+        // عناصر DOM
+        const stateSelect = document.getElementById('state');
+        const communeInput = document.getElementById('commune');
+        const deliveryOptions = document.querySelectorAll('.delivery-option');
+        const productsSection = document.getElementById('productsSection');
+        const productsList = document.getElementById('productsList');
+        const totalAmountEl = document.getElementById('totalAmount');
+        const submitBtn = document.getElementById('submitBtn');
+        const resetBtn = document.getElementById('resetBtn');
+        const notification = document.getElementById('notification');
+        const adminPanel = document.getElementById('adminPanel');
+        const adminToggle = document.getElementById('adminToggle');
+        const addNewProductBtn = document.getElementById('addNewProduct');
+        const resetProductsBtn = document.getElementById('resetProducts');
+        const newProductName = document.getElementById('newProductName');
+        const newProductPrice = document.getElementById('newProductPrice');
+        
+        // تهيئة EmailJS
+        (function() {
+            emailjs.init("lZq4RDDeEs6nA3gxf");
+        })();
+        
+        // تعبئة قائمة الولايات
+        function populateStates() {
+            algerianStates.forEach(state => {
+                const option = document.createElement('option');
+                option.value = state;
+                option.textContent = state;
+                stateSelect.appendChild(option);
+            });
+        }
+        
+        // تغيير نوع التوصيل
+        deliveryOptions.forEach(option => {
+            option.addEventListener('click', () => {
+                deliveryOptions.forEach(opt => opt.classList.remove('selected'));
+                option.classList.add('selected');
+                deliveryType = option.id === 'office-delivery' ? 'office' : 'home';
+            });
+        });
+        
+        // عرض المنتجات المتاحة
+        function displayAvailableProducts() {
+            productsSection.innerHTML = '';
+            
+            availableProducts.forEach(product => {
+                const productCard = document.createElement('div');
+                productCard.className = 'product-card';
+                productCard.innerHTML = `
+                    <div class="product-image">
+                        <i class="fas ${product.icon}"></i>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-title">${product.name}</div>
+                        <div class="product-price">${product.price.toLocaleString()} دج</div>
+                        <div class="product-quantity">
+                            <button class="btn btn-remove decrease" data-id="${product.id}">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                            <input type="number" min="0" value="0" id="qty-${product.id}" readonly>
+                            <button class="btn btn-add increase" data-id="${product.id}">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+                productsSection.appendChild(productCard);
+            });
+            
+            // إضافة مستمعين للأزرار
+            document.querySelectorAll('.increase').forEach(btn => {
+                btn.addEventListener('click', () => updateProductQuantity(btn.dataset.id, 1));
+            });
+            
+            document.querySelectorAll('.decrease').forEach(btn => {
+                btn.addEventListener('click', () => updateProductQuantity(btn.dataset.id, -1));
+            });
+        }
+        
+        // تحديث كمية المنتج
+        function updateProductQuantity(id, change) {
+            const input = document.getElementById(`qty-${id}`);
+            let currentQty = parseInt(input.value) || 0;
+            let newQty = currentQty + change;
+            
+            if (newQty < 0) newQty = 0;
+            
+            input.value = newQty;
+            
+            // تحديث قائمة المنتجات المختارة
+            if (newQty > 0) {
+                addProductToCart(parseInt(id), newQty);
+            } else {
+                removeProductFromCart(parseInt(id));
+            }
+            
+            updateCartDisplay();
+        }
+        
+        // إضافة منتج إلى السلة
+        function addProductToCart(productId, quantity) {
+            const product = availableProducts.find(p => p.id === productId);
+            
+            if (!product) return;
+            
+            const existingProduct = products.find(p => p.id === productId);
+            
+            if (existingProduct) {
+                existingProduct.quantity = quantity;
+            } else {
+                products.push({
+                    id: product.id,
+                    name: product.name,
+                    price: product.price,
+                    quantity: quantity
+                });
+            }
+            
+            calculateTotal();
+        }
+        
+        // إزالة منتج من السلة
+        function removeProductFromCart(productId) {
+            products = products.filter(p => p.id !== productId);
+            calculateTotal();
+        }
+        
+        // حساب المجموع الإجمالي
+        function calculateTotal() {
+            totalAmount = products.reduce((sum, product) => sum + (product.price * product.quantity), 0);
+            totalAmountEl.textContent = totalAmount.toLocaleString() + ' دج';
+        }
+        
+        // تحديث عرض السلة
+        function updateCartDisplay() {
+            productsList.innerHTML = '';
+            
+            if (products.length === 0) {
+                productsList.innerHTML = '<tr><td colspan="5" style="text-align: center; padding: 30px;">لا توجد منتجات في السلة</td></tr>';
+                return;
+            }
+            
+            products.forEach(product => {
+                const row = document.createElement('tr');
+                const total = product.price * product.quantity;
+                
+                row.innerHTML = `
+                    <td>${product.name}</td>
+                    <td>${product.quantity}</td>
+                    <td>${product.price.toLocaleString()} دج</td>
+                    <td>${total.toLocaleString()} دج</td>
+                    <td>
+                        <button class="btn btn-remove remove-from-cart" data-id="${product.id}">
+                            <i class="fas fa-trash"></i> حذف
+                        </button>
+                    </td>
+                `;
+                
+                productsList.appendChild(row);
+            });
+            
+            // إضافة مستمعين لأزرار الحذف
+            document.querySelectorAll('.remove-from-cart').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const productId = parseInt(btn.dataset.id);
+                    removeProductFromCart(productId);
+                    document.getElementById(`qty-${productId}`).value = 0;
+                    updateCartDisplay();
+                });
+            });
+        }
+        
+        // إرسال الطلبية
+        function submitOrder() {
+            const firstName = document.getElementById('firstName').value.trim();
+            const lastName = document.getElementById('lastName').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            const state = stateSelect.value;
+            const commune = communeInput.value.trim();
+            const notes = document.getElementById('notes').value.trim();
+            
+            // التحقق من البيانات
+            if (!firstName || !lastName || !phone || !state || !commune) {
+                showNotification("الرجاء ملء جميع الحقول الإلزامية", true);
+                return;
+            }
+            
+            if (products.length === 0) {
+                showNotification("الرجاء إضافة منتجات إلى الطلبية", true);
+                return;
+            }
+            
+            // تحضير بيانات المنتجات
+            const productsDetails = products.map(p => 
+                `${p.name} (${p.quantity} × ${p.price.toLocaleString()} دج)`
+            ).join("\n");
+            
+            const fullName = `${firstName} ${lastName}`;
+            
+            // تحضير بيانات البريد
+            const templateParams = {
+                to_email: "storedz.emailjs@gmail.com", // إضافة البريد المستهدف
+                full_name: fullName,
+                phone: phone,
+                wilaya: state,
+                commune: commune,
+                delivery_type: deliveryType === "office" ? "مكتب الولاية" : "المنزل",
+                notes: notes || "لا توجد ملاحظات",
+                product: productsDetails,
+                total_amount: totalAmount.toLocaleString() + " دج",
+                order_details: `
+                    الاسم الكامل: ${fullName}
+                    رقم الهاتف: ${phone}
+                    الولاية: ${state}
+                    البلدية: ${commune}
+                    نوع التوصيل: ${deliveryType === "office" ? "مكتب الولاية" : "المنزل"}
+                    السعر الإجمالي: ${totalAmount.toLocaleString()} دج
+                    
+                    المنتجات:
+                    ${productsDetails}
+                    
+                    ملاحظات: ${notes || "لا توجد ملاحظات"}
+                `
+            };
+            
+            // تغيير نص الزر لإظهار التحميل
+            const originalBtnText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<span class="loading-spinner"></span> جاري الإرسال...';
+            submitBtn.disabled = true;
+            
+            // إرسال البريد باستخدام EmailJS
+            emailjs.send("service_sie67wj", "template_lsn9ptu", templateParams)
+                .then(function(response) {
+                    showNotification("تم إرسال طلبك بنجاح!");
+                    resetForm();
+                    
+                    // طباعة البيانات في الكونسول للتأكد
+                    console.log("البيانات المرسلة إلى EmailJS:");
+                    console.log(templateParams);
+                }, function(error) {
+                    showNotification("حدث خطأ أثناء إرسال الطلبية، الرجاء المحاولة لاحقاً", true);
+                    console.error("خطأ في إرسال البريد:", error);
+                })
+                .finally(() => {
+                    submitBtn.innerHTML = originalBtnText;
+                    submitBtn.disabled = false;
+                });
+        }
+        
+        // إظهار الإشعار
+        function showNotification(message, isError = false) {
+            const notification = document.getElementById('notification');
+            const icon = notification.querySelector('i');
+            const text = notification.querySelector('span');
+            
+            text.textContent = message;
+            notification.className = "notification";
+            
+            if (isError) {
+                notification.classList.add("error");
+                icon.className = "fas fa-exclamation-circle";
+            } else {
+                icon.className = "fas fa-check-circle";
+            }
+            
+            notification.classList.add("show");
+            
+            setTimeout(() => {
+                notification.classList.remove("show");
+            }, 3000);
+        }
+        
+        // إعادة تعيين النموذج
+        function resetForm() {
+            document.getElementById('firstName').value = '';
+            document.getElementById('lastName').value = '';
+            document.getElementById('phone').value = '';
+            stateSelect.value = '';
+            communeInput.value = '';
+            document.getElementById('notes').value = '';
+            
+            // إعادة تعيين المنتجات
+            products = [];
+            availableProducts.forEach(p => {
+                document.getElementById(`qty-${p.id}`).value = 0;
+            });
+            
+            updateCartDisplay();
+            calculateTotal();
+        }
+        
+        // إضافة منتج جديد
+        function addNewProduct() {
+            const name = newProductName.value.trim();
+            const price = parseFloat(newProductPrice.value);
+            
+            if (!name || isNaN(price) || price <= 0) {
+                showNotification("الرجاء إدخال اسم وسعر صالحين للمنتج", true);
+                return;
+            }
+            
+            const newId = availableProducts.length > 0 
+                ? Math.max(...availableProducts.map(p => p.id)) + 1 
+                : 1;
+                
+            const randomIcon = icons[Math.floor(Math.random() * icons.length)];
+            
+            const newProduct = {
+                id: newId,
+                name: name,
+                price: price,
+                icon: randomIcon
+            };
+            
+            availableProducts.push(newProduct);
+            
+            // إعادة عرض المنتجات
+            displayAvailableProducts();
+            
+            // إعادة تعيين حقول الإضافة
+            newProductName.value = '';
+            newProductPrice.value = '';
+            
+            // تمييز لوحة الإدارة
+            adminPanel.classList.add('highlight');
+            setTimeout(() => adminPanel.classList.remove('highlight'), 2000);
+            
+            showNotification("تمت إضافة المنتج بنجاح!");
+        }
+        
+        // إعادة تعيين المنتجات
+        function resetProducts() {
+            if (confirm('هل تريد حقاً إعادة تعيين المنتجات إلى الحالة الافتراضية؟')) {
+                availableProducts = [
+                    { id: 1, name: "هاتف ذكي", price: 25000, icon: "fa-mobile-alt" },
+                    { id: 2, name: "لابتوب", price: 65000, icon: "fa-laptop" },
+                    { id: 3, name: "سماعات", price: 5000, icon: "fa-headphones" },
+                    { id: 4, name: "شاشة تلفزيون", price: 45000, icon: "fa-tv" }
+                ];
+                
+                displayAvailableProducts();
+                resetForm();
+                showNotification("تمت إعادة تعيين المنتجات بنجاح!");
+            }
+        }
+        
+        // تهيئة التطبيق
+        function initApp() {
+            populateStates();
+            displayAvailableProducts();
+            updateCartDisplay();
+            
+            // إضافة مستمعين للأحداث
+            submitBtn.addEventListener('click', submitOrder);
+            resetBtn.addEventListener('click', resetForm);
+            adminToggle.addEventListener('click', () => {
+                adminPanel.style.display = adminPanel.style.display === 'none' ? 'block' : 'none';
+            });
+            addNewProductBtn.addEventListener('click', addNewProduct);
+            resetProductsBtn.addEventListener('click', resetProducts);
+        }
+        
+        // بدء التطبيق عند تحميل الصفحة
+        window.addEventListener('DOMContentLoaded', initApp);
+    </script>
+</body>
+</html>
