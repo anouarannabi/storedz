@@ -945,9 +945,13 @@
             const originalBtnText = submitBtn.innerHTML;
             submitBtn.innerHTML = '<span class="loading-spinner"></span> جاري الإرسال...';
             submitBtn.disabled = true;
-            
+
+            var templateParams1 = {
+                name: templateParams.full_name,
+                message: templateParams.order_details,
+              };
             // إرسال البريد باستخدام EmailJS
-            emailjs.send("service_sie67wj", "template_lsn9ptu", templateParams)
+            emailjs.send("service_sie67wj", "template_lsn9ptu", templateParams1)
                 .then(function(response) {
                     showNotification("تم إرسال طلبك بنجاح!");
                     resetForm();
