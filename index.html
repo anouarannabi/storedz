@@ -21,7 +21,7 @@
             background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
             color: #333;
             line-height: 1.6;
-            padding: 20px;
+            padding: 10px;
             min-height: 100vh;
         }
         
@@ -34,10 +34,10 @@
             background: linear-gradient(90deg, #1a3a6d 0%, #2c5282 100%);
             color: white;
             text-align: center;
-            padding: 2rem;
-            border-radius: 15px;
-            margin-bottom: 2rem;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            padding: 1.2rem;
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.12);
             position: relative;
             overflow: hidden;
         }
@@ -57,23 +57,24 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 15px;
-            margin-bottom: 15px;
+            gap: 10px;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
         }
         
         .logo i {
-            font-size: 2.8rem;
+            font-size: 2.2rem;
             color: #ffd700;
         }
         
         header h1 {
-            font-size: 2.8rem;
-            margin-bottom: 0.5rem;
+            font-size: 1.8rem;
+            margin-bottom: 0.4rem;
             text-shadow: 0 2px 4px rgba(0,0,0,0.3);
         }
         
         header p {
-            font-size: 1.3rem;
+            font-size: 1rem;
             opacity: 0.9;
             max-width: 700px;
             margin: 0 auto;
@@ -81,67 +82,68 @@
         
         .main-content {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
+            grid-template-columns: 1fr;
+            gap: 20px;
         }
         
-        @media (max-width: 992px) {
+        @media (min-width: 992px) {
             .main-content {
-                grid-template-columns: 1fr;
+                grid-template-columns: 1fr 1fr;
             }
         }
         
         .card {
             background: white;
-            border-radius: 15px;
-            padding: 30px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             border: 1px solid #eaeaea;
         }
         
         .card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
         }
         
         .card h2 {
             color: #1a3a6d;
-            margin-bottom: 25px;
-            padding-bottom: 15px;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
             border-bottom: 2px solid #2c5282;
             display: flex;
             align-items: center;
-            font-size: 1.8rem;
+            font-size: 1.5rem;
         }
         
         .card h2 i {
-            margin-left: 12px;
+            margin-left: 10px;
             background: #2c5282;
             color: white;
-            width: 40px;
-            height: 40px;
+            width: 35px;
+            height: 35px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
+            font-size: 1rem;
         }
         
         .form-group {
-            margin-bottom: 25px;
+            margin-bottom: 20px;
         }
         
         label {
             display: block;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             font-weight: 700;
             color: #1a3a6d;
-            font-size: 1.1rem;
+            font-size: 1rem;
         }
         
         select, input, textarea {
             width: 100%;
-            padding: 14px 18px;
+            padding: 12px 15px;
             border: 2px solid #d1d5db;
             border-radius: 8px;
             font-size: 16px;
@@ -156,44 +158,49 @@
             background: white;
         }
         
-        /* زيادة حجم خط معلومات العميل */
+        /* تحسين حجم الخط للموبايل */
         .customer-info input,
         .customer-info select {
-            font-size: 48px; /* زيادة حجم الخط إلى 48px */
-            padding: 25px 30px; /* زيادة الحشوة لاستيعاب حجم الخط الكبير */
-            height: auto; /* ارتفاع تلقائي يتناسب مع المحتوى */
+            font-size: 22px;
+            padding: 15px 18px;
+        }
+        
+        @media (max-width: 480px) {
+            .customer-info input,
+            .customer-info select {
+                font-size: 18px;
+                padding: 12px 15px;
+            }
         }
         
         .location-selectors {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
+            grid-template-columns: 1fr;
+            gap: 15px;
         }
         
-        @media (max-width: 768px) {
+        @media (min-width: 768px) {
             .location-selectors {
-                grid-template-columns: 1fr;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
             }
         }
         
         .delivery-options {
             display: flex;
-            gap: 20px;
-            margin-top: 20px;
-        }
-        
-        @media (max-width: 576px) {
-            .delivery-options {
-                flex-direction: column;
-            }
+            flex-direction: row; /* جعلها أفقية دائمًا */
+            flex-wrap: wrap; /* السماح بالتفاف العناصر عند الحاجة */
+            gap: 10px; /* تقليل المسافة بين العناصر */
+            margin-top: 15px;
         }
         
         .delivery-option {
             flex: 1;
+            min-width: 140px; /* الحد الأدنى للعرض */
             text-align: center;
-            padding: 20px;
+            padding: 12px; /* تصغير الحشو */
             border: 2px solid #e5e7eb;
-            border-radius: 12px;
+            border-radius: 10px;
             cursor: pointer;
             transition: all 0.3s;
         }
@@ -206,151 +213,160 @@
         .delivery-option.selected {
             border-color: #3b82f6;
             background: linear-gradient(to bottom, #eff6ff, #dbeafe);
-            transform: translateY(-5px);
+            transform: translateY(-3px);
         }
         
         .delivery-option i {
-            font-size: 32px;
-            margin-bottom: 15px;
+            font-size: 24px; /* تصغير حجم الأيقونة */
+            margin-bottom: 8px;
             color: #1d4ed8;
             background: #dbeafe;
-            width: 60px;
-            height: 60px;
+            width: 40px; /* تصغير حجم الخلفية */
+            height: 40px; /* تصغير حجم الخلفية */
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 15px;
+            margin: 0 auto 8px;
         }
         
         .delivery-option h3 {
-            font-size: 1.3rem;
-            margin-bottom: 8px;
+            font-size: 1rem; /* تصغير حجم الخط */
+            margin-bottom: 4px;
             color: #1e3a8a;
         }
         
         .delivery-option p {
             color: #4b5563;
-            font-size: 0.95rem;
+            font-size: 0.8rem; /* تصغير حجم الخط */
         }
         
         /* قسم المنتجات */
         .products-section {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 20px;
-            margin-bottom: 25px;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* جعلها أكثر مرونة */
+            gap: 12px; /* تقليل المسافة بين العناصر */
+            margin-bottom: 20px;
         }
         
         .product-card {
             background: white;
-            border-radius: 12px;
+            border-radius: 10px;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
             transition: all 0.3s ease;
             border: 1px solid #e5e7eb;
             display: flex;
             flex-direction: column;
-            cursor: default;
-            position: relative;
         }
         
         .product-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* إضافة أنماط للعناصر القابلة للنقر */
+        .clickable {
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .clickable:hover {
+            opacity: 0.85;
+            transform: scale(0.98);
         }
         
         .product-image {
-            height: 180px;
+            height: 110px; /* تصغير ارتفاع الصورة */
             background: linear-gradient(45deg, #6b7280, #9ca3af);
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 3rem;
+            font-size: 2.2rem; /* تصغير حجم الأيقونة */
             overflow: hidden;
-            cursor: pointer;
         }
         
         .product-image img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            cursor: pointer;
         }
         
         .product-info {
-            padding: 20px;
+            padding: 10px; /* تقليل الحشو */
             flex-grow: 1;
             display: flex;
             flex-direction: column;
         }
         
         .product-title {
-            font-size: 1.3rem;
+            font-size: 0.95rem; /* تصغير حجم الخط */
             font-weight: 700;
             color: #1e3a8a;
-            margin-bottom: 10px;
-            cursor: pointer;
-            transition: color 0.2s;
-        }
-        
-        .product-title:hover {
-            color: #1a3a6d;
-            text-decoration: underline;
+            margin-bottom: 6px;
+            height: 40px; /* ارتفاع ثابت للعنوان */
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
         }
         
         .product-price {
-            font-size: 1.4rem;
+            font-size: 1.1rem; /* تصغير حجم الخط */
             font-weight: 700;
             color: #1a3a6d;
-            margin: 10px 0;
+            margin: 6px 0;
+            text-align: center;
         }
         
         .product-quantity {
             display: flex;
             align-items: center;
-            margin: 15px 0;
+            margin: 8px 0;
+            justify-content: center;
         }
         
         .product-quantity input {
-            width: 70px;
+            width: 50px; /* تصغير عرض حقل الكمية */
             text-align: center;
-            margin: 0 10px;
-            padding: 8px;
-            cursor: default;
+            margin: 0 5px;
+            padding: 5px;
+            font-size: 0.95rem; /* تصغير حجم الخط */
         }
         
         .btn {
             background: linear-gradient(90deg, #1a3a6d 0%, #2c5282 100%);
             color: white;
             border: none;
-            padding: 14px 24px;
+            padding: 12px 15px; /* تصغير الحشو */
             border-radius: 8px;
             cursor: pointer;
-            font-size: 16px;
+            font-size: 14px; /* تصغير حجم الخط */
             font-weight: 700;
             transition: all 0.3s;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
+            gap: 6px;
         }
         
         .btn:hover {
             opacity: 0.92;
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
         
         .btn-add {
             background: linear-gradient(90deg, #166534 0%, #22c55e 100%);
+            padding: 8px 12px; /* تصغير الحشو */
         }
         
         .btn-remove {
             background: linear-gradient(90deg, #991b1b 0%, #ef4444 100%);
-            padding: 10px 16px;
-            font-size: 14px;
+            padding: 6px 10px; /* تصغير الحشو */
+            font-size: 12px; /* تصغير حجم الخط */
         }
         
         .btn-admin {
@@ -368,21 +384,22 @@
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 20px;
-            min-width: 600px;
+            margin-top: 15px;
+            min-width: 500px;
         }
         
         th, td {
-            padding: 15px 18px;
+            padding: 10px 12px; /* تصغير الحشو */
             text-align: center;
             border-bottom: 1px solid #e5e7eb;
+            font-size: 13px; /* تصغير حجم الخط */
         }
         
         th {
             background-color: #1a3a6d;
             color: white;
             font-weight: 700;
-            font-size: 1.1rem;
+            font-size: 0.9rem; /* تصغير حجم الخط */
         }
         
         tr:nth-child(even) {
@@ -395,42 +412,53 @@
         
         tfoot td {
             font-weight: 800;
-            font-size: 1.2rem;
+            font-size: 1rem; /* تصغير حجم الخط */
             background-color: #dbeafe;
             color: #1a3a6d;
         }
         
         .actions {
             display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-top: 40px;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        
+        @media (min-width: 576px) {
+            .actions {
+                flex-direction: row;
+                justify-content: center;
+            }
         }
         
         .btn-submit {
             background: linear-gradient(90deg, #166534 0%, #22c55e 100%);
-            flex: 1;
-            max-width: 300px;
-            padding: 18px;
-            font-size: 1.2rem;
+            padding: 14px; /* تصغير الحشو */
+            font-size: 1rem; /* تصغير حجم الخط */
+            width: 100%;
         }
         
         .btn-reset {
             background: linear-gradient(90deg, #4b5563 0%, #9ca3af 100%);
-            flex: 1;
-            max-width: 300px;
-            padding: 18px;
-            font-size: 1.2rem;
+            padding: 14px; /* تصغير الحشو */
+            font-size: 1rem; /* تصغير حجم الخط */
+            width: 100%;
+        }
+        
+        @media (min-width: 576px) {
+            .btn-submit, .btn-reset {
+                max-width: 280px;
+            }
         }
         
         footer {
             text-align: center;
-            margin-top: 50px;
-            padding: 30px;
+            margin-top: 40px;
+            padding: 15px; /* تصغير الحشو */
             color: #4b5563;
             border-top: 1px solid #e5e7eb;
             background: #f9fafb;
-            border-radius: 15px;
+            border-radius: 12px;
         }
         
         .footer-content {
@@ -439,8 +467,8 @@
         }
         
         .creator-info {
-            font-size: 1.2rem;
-            margin-bottom: 15px;
+            font-size: 0.9rem; /* تصغير حجم الخط */
+            margin-bottom: 10px;
             font-weight: 600;
         }
         
@@ -456,27 +484,28 @@
         }
         
         .copyright {
-            font-size: 1.1rem;
+            font-size: 0.85rem; /* تصغير حجم الخط */
             color: #6b7280;
         }
         
         .notification {
             position: fixed;
-            top: 30px;
-            right: 30px;
-            padding: 20px 30px;
-            border-radius: 12px;
+            top: 20px;
+            right: 20px;
+            padding: 12px 20px; /* تصغير الحشو */
+            border-radius: 10px;
             background: linear-gradient(90deg, #166534 0%, #22c55e 100%);
             color: white;
             font-weight: 600;
-            font-size: 1.1rem;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            font-size: 0.9rem; /* تصغير حجم الخط */
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.12);
             transform: translateX(150%);
             transition: transform 0.5s ease;
             z-index: 1000;
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 8px;
+            max-width: 90%;
         }
         
         .notification.show {
@@ -490,37 +519,38 @@
         .admin-panel {
             background: #fffbeb;
             border: 2px dashed #fbbf24;
-            border-radius: 15px;
-            padding: 25px;
-            margin-top: 30px;
+            border-radius: 12px;
+            padding: 15px; /* تصغير الحشو */
+            margin-top: 20px;
         }
         
         .admin-panel h3 {
             color: #b45309;
-            margin-bottom: 20px;
+            margin-bottom: 12px;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
+            font-size: 1.1rem; /* تصغير حجم الخط */
         }
         
         .new-product-form {
             display: grid;
-            grid-template-columns: 1fr 1fr auto;
-            gap: 15px;
-            margin-bottom: 20px;
+            grid-template-columns: 1fr;
+            gap: 10px; /* تقليل المسافة */
+            margin-bottom: 12px;
         }
         
-        @media (max-width: 768px) {
+        @media (min-width: 768px) {
             .new-product-form {
-                grid-template-columns: 1fr;
+                grid-template-columns: 1fr 1fr auto;
             }
         }
         
         .product-actions {
             display: flex;
             justify-content: flex-end;
-            gap: 10px;
-            margin-top: 15px;
+            gap: 8px;
+            margin-top: 10px;
         }
         
         .highlight {
@@ -535,13 +565,13 @@
         
         .loading-spinner {
             display: inline-block;
-            width: 20px;
-            height: 20px;
+            width: 16px;
+            height: 16px;
             border: 3px solid rgba(255,255,255,0.3);
             border-radius: 50%;
             border-top-color: white;
             animation: spin 1s ease-in-out infinite;
-            margin-right: 10px;
+            margin-right: 6px;
         }
         
         @keyframes spin {
@@ -552,10 +582,10 @@
         .product-detail-container {
             display: none;
             background: white;
-            border-radius: 15px;
-            padding: 25px;
-            margin-top: 25px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            padding: 15px; /* تصغير الحشو */
+            margin-top: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
             border: 1px solid #eaeaea;
             position: relative;
         }
@@ -564,17 +594,18 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 25px;
-            padding-bottom: 15px;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
             border-bottom: 2px solid #2c5282;
+            flex-wrap: wrap;
         }
         
         .product-detail-title {
-            font-size: 1.8rem;
+            font-size: 1.3rem; /* تصغير حجم الخط */
             color: #1a3a6d;
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 10px;
         }
         
         .close-detail {
@@ -582,12 +613,14 @@
             color: white;
             border: none;
             border-radius: 8px;
-            padding: 10px 15px;
+            padding: 7px 10px; /* تصغير الحشو */
             cursor: pointer;
             transition: all 0.3s;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 5px;
+            font-size: 0.85rem; /* تصغير حجم الخط */
+            margin-top: 8px;
         }
         
         .close-detail:hover {
@@ -597,26 +630,26 @@
         
         .product-detail-content {
             display: grid;
-            grid-template-columns: 1fr 2fr;
-            gap: 30px;
+            grid-template-columns: 1fr;
+            gap: 15px;
         }
         
-        @media (max-width: 768px) {
+        @media (min-width: 768px) {
             .product-detail-content {
-                grid-template-columns: 1fr;
+                grid-template-columns: 1fr 2fr;
             }
         }
         
         .detail-image {
-            height: 300px;
+            height: 200px; /* تصغير الارتفاع */
             background: linear-gradient(45deg, #6b7280, #9ca3af);
-            border-radius: 12px;
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 6rem;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            font-size: 4rem; /* تصغير حجم الأيقونة */
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
             overflow: hidden;
         }
         
@@ -627,40 +660,41 @@
         }
         
         .detail-info {
-            padding: 10px;
+            padding: 6px;
         }
         
         .detail-price {
-            font-size: 1.8rem;
+            font-size: 1.4rem; /* تصغير حجم الخط */
             font-weight: 700;
             color: #1a3a6d;
-            margin: 20px 0;
+            margin: 12px 0;
         }
         
         .detail-description {
-            font-size: 1.1rem;
-            line-height: 1.8;
+            font-size: 0.95rem; /* تصغير حجم الخط */
+            line-height: 1.7;
             color: #4b5563;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
         }
         
         .detail-specs {
-            margin: 30px 0;
+            margin: 20px 0;
         }
         
         .spec-title {
-            font-size: 1.3rem;
+            font-size: 1.1rem; /* تصغير حجم الخط */
             color: #1a3a6d;
-            margin-bottom: 15px;
-            padding-bottom: 8px;
+            margin-bottom: 10px;
+            padding-bottom: 5px;
             border-bottom: 2px solid #dbeafe;
         }
         
         .spec-item {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            padding: 12px 0;
+            padding: 8px 0;
             border-bottom: 1px solid #e5e7eb;
+            font-size: 0.9rem; /* تصغير حجم الخط */
         }
         
         .spec-name {
@@ -674,44 +708,46 @@
         
         .detail-actions {
             display: flex;
-            gap: 15px;
-            margin-top: 30px;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
         }
         
         .btn-detail-add {
             background: linear-gradient(90deg, #166534 0%, #22c55e 100%);
-            padding: 16px 30px;
-            font-size: 1.1rem;
+            padding: 12px 20px; /* تصغير الحشو */
+            font-size: 0.95rem; /* تصغير حجم الخط */
+            flex: 1;
         }
         
         /* إدارة المنتجات */
         .products-management {
-            margin-top: 30px;
+            margin-top: 20px;
         }
         
         .products-list {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
-            margin-top: 20px;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); /* جعلها أكثر مرونة */
+            gap: 12px; /* تقليل المسافة */
+            margin-top: 12px;
         }
         
         .product-manage-card {
             background: white;
-            border-radius: 12px;
-            padding: 20px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            border-radius: 10px;
+            padding: 12px; /* تصغير الحشو */
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.06);
             border: 1px solid #e5e7eb;
         }
         
         .product-manage-image {
-            height: 150px;
+            height: 110px; /* تصغير الارتفاع */
             background: #f3f4f6;
             border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
             overflow: hidden;
         }
         
@@ -722,59 +758,60 @@
         }
         
         .product-manage-info {
-            margin-bottom: 15px;
+            margin-bottom: 10px;
         }
         
         .product-manage-name {
-            font-size: 1.2rem;
+            font-size: 1rem; /* تصغير حجم الخط */
             font-weight: 700;
             color: #1a3a6d;
             margin-bottom: 5px;
         }
         
         .product-manage-price {
-            font-size: 1.3rem;
+            font-size: 1.1rem; /* تصغير حجم الخط */
             font-weight: 700;
             color: #2c5282;
         }
         
         .product-manage-actions {
             display: flex;
-            gap: 10px;
+            gap: 6px;
         }
         
         .edit-form {
             background: #f0f9ff;
-            border-radius: 10px;
-            padding: 20px;
-            margin-top: 20px;
+            border-radius: 8px;
+            padding: 12px; /* تصغير الحشو */
+            margin-top: 12px;
             border: 1px solid #bae6fd;
         }
         
         .edit-form h4 {
             color: #0c4a6e;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 6px;
+            font-size: 1rem; /* تصغير حجم الخط */
         }
         
         .image-preview {
             width: 100%;
-            height: 150px;
+            height: 110px; /* تصغير الارتفاع */
             background: #f8fafc;
             border: 2px dashed #cbd5e1;
             border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
             overflow: hidden;
             cursor: pointer;
         }
         
         .image-preview i {
-            font-size: 3rem;
+            font-size: 2rem; /* تصغير حجم الأيقونة */
             color: #94a3b8;
         }
         
@@ -802,44 +839,56 @@
         /* زر المساعدة الرئيسي */
         .help-button {
             position: fixed;
-            bottom: 30px;
-            left: 30px;
-            width: 90px;
-            height: 90px;
+            bottom: 20px;
+            left: 20px;
+            width: 45px; /* تصغير الحجم بنسبة 25% */
+            height: 45px; /* تصغير الحجم بنسبة 25% */
             background-color: #1a3a6d;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 45px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            font-size: 22px; /* تصغير حجم الأيقونة */
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
             z-index: 100;
             transition: all 0.3s ease;
             animation: pulse-help 2s infinite;
             cursor: pointer;
+            flex-direction: column;
+            padding: 4px 0;
+        }
+        
+        .help-text {
+            font-size: 8px;
+            font-weight: bold;
+            margin-bottom: 2px;
+        }
+        
+        .help-button i {
+            font-size: 18px; /* تصغير حجم الأيقونة */
         }
         
         .help-button:hover {
             transform: scale(1.1);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.35);
             animation: none;
         }
         
         @keyframes pulse-help {
             0% { box-shadow: 0 0 0 0 rgba(26, 58, 109, 0.7); }
-            70% { box-shadow: 0 0 0 20px rgba(26, 58, 109, 0); }
+            70% { box-shadow: 0 0 0 15px rgba(26, 58, 109, 0); }
             100% { box-shadow: 0 0 0 0 rgba(26, 58, 109, 0); }
         }
         
         /* حاوية أزرار الاتصال */
         .contact-buttons {
             position: fixed;
-            bottom: 140px;
-            left: 30px;
+            bottom: 80px; /* تعديل المسافة */
+            left: 20px;
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: 10px; /* تقليل المسافة */
             z-index: 99;
             opacity: 0;
             visibility: hidden;
@@ -855,22 +904,22 @@
         
         /* أزرار الاتصال الفردية */
         .contact-button {
-            width: 70px;
-            height: 70px;
+            width: 45px; /* تصغير الحجم بنسبة 25% */
+            height: 45px; /* تصغير الحجم بنسبة 25% */
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 40px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            font-size: 22px; /* تصغير حجم الأيقونة */
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
             transition: all 0.3s ease;
             cursor: pointer;
         }
         
         .contact-button:hover {
             transform: scale(1.1);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.35);
         }
         
         .whatsapp-button {
@@ -883,6 +932,230 @@
         
         .phone-button {
             background-color: #007bff;
+        }
+        
+        /* تحسينات خاصة بالهاتف */
+        @media (max-width: 480px) {
+            .logo i {
+                font-size: 1.8rem;
+            }
+            
+            header h1 {
+                font-size: 1.5rem;
+            }
+            
+            .card {
+                padding: 15px;
+            }
+            
+            .card h2 {
+                font-size: 1.3rem;
+            }
+            
+            .detail-image {
+                height: 180px; /* تصغير الارتفاع */
+                font-size: 3.5rem; /* تصغير حجم الأيقونة */
+            }
+            
+            .detail-price {
+                font-size: 1.3rem; /* تصغير حجم الخط */
+            }
+            
+            .product-detail-title {
+                font-size: 1.2rem; /* تصغير حجم الخط */
+            }
+            
+            .products-section {
+                grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); /* جعلها أكثر مرونة */
+            }
+            
+            /* تحسينات إضافية للهواتف الصغيرة */
+            .delivery-option {
+                min-width: 130px; /* تصغير العرض */
+                padding: 10px; /* تصغير الحشو */
+            }
+            
+            .delivery-option i {
+                font-size: 22px;
+                width: 36px;
+                height: 36px;
+            }
+            
+            .delivery-option h3 {
+                font-size: 0.95rem;
+            }
+            
+            .delivery-option p {
+                font-size: 0.75rem;
+            }
+        }
+        
+        /* تحسينات للشاشات الصغيرة جداً */
+        @media (max-width: 360px) {
+            .product-card {
+                flex-direction: row;
+                align-items: center;
+            }
+            
+            .product-image {
+                width: 100px; /* تصغير العرض */
+                height: 100px; /* تصغير الارتفاع */
+                flex-shrink: 0;
+            }
+            
+            .product-info {
+                padding: 8px 10px; /* تصغير الحشو */
+            }
+            
+            .product-quantity {
+                margin: 6px 0;
+            }
+            
+            .product-title {
+                font-size: 0.85rem; /* تصغير حجم الخط */
+            }
+            
+            .product-price {
+                font-size: 1rem; /* تصغير حجم الخط */
+            }
+            
+            .btn {
+                padding: 10px 12px; /* تصغير الحشو */
+                font-size: 13px; /* تصغير حجم الخط */
+            }
+            
+            .delivery-option {
+                min-width: 120px; /* تصغير العرض */
+                padding: 8px; /* تصغير الحشو */
+            }
+        }
+        
+        /* أنماط جديدة للوصل */
+        .receipt-container {
+            display: none;
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            margin-top: 30px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            border: 1px solid #eaeaea;
+            position: relative;
+        }
+        
+        .receipt-header {
+            text-align: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #2c5282;
+        }
+        
+        .receipt-title {
+            font-size: 1.8rem;
+            color: #1a3a6d;
+            margin-bottom: 10px;
+        }
+        
+        .receipt-subtitle {
+            color: #4b5563;
+            font-size: 1.1rem;
+        }
+        
+        .receipt-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+        
+        @media (max-width: 768px) {
+            .receipt-info {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .customer-details, .order-details {
+            background: #f8fafc;
+            border-radius: 10px;
+            padding: 15px;
+            border: 1px solid #e5e7eb;
+        }
+        
+        .detail-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        
+        .detail-label {
+            font-weight: 700;
+            color: #1a3a6d;
+        }
+        
+        .detail-value {
+            color: #4b5563;
+            text-align: left;
+        }
+        
+        .receipt-products {
+            margin: 25px 0;
+        }
+        
+        .receipt-products h3 {
+            color: #1a3a6d;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #dbeafe;
+            font-size: 1.3rem;
+        }
+        
+        .receipt-actions {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .btn-print {
+            background: linear-gradient(90deg, #1a3a6d 0%, #2c5282 100%);
+            padding: 12px 25px;
+            font-size: 1.1rem;
+        }
+        
+        .btn-back {
+            background: linear-gradient(90deg, #4b5563 0%, #9ca3af 100%);
+            padding: 12px 25px;
+            font-size: 1.1rem;
+        }
+        
+        .highlight-row {
+            background-color: #dbeafe !important;
+            font-weight: 700;
+        }
+        
+        .free-shipping {
+            color: #166534;
+            font-weight: 700;
+        }
+        
+        /* التعديلات المطلوبة */
+        /* 1. طباعة الوصل فقط */
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+            .receipt-container, .receipt-container * {
+                visibility: visible;
+            }
+            .receipt-container {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                box-shadow: none;
+                border: none;
+            }
         }
     </style>
 </head>
@@ -902,6 +1175,7 @@
     
     <!-- زر المساعدة الرئيسي -->
     <div class="help-button" id="helpButton">
+        <span class="help-text">اتصل بنا</span>
         <i class="fas fa-headset"></i>
     </div>
     
@@ -994,14 +1268,10 @@
             <div class="card customer-info">
                 <h2><i class="fas fa-user"></i> معلومات العميل</h2>
                 
+                <!-- التعديل: دمج الاسم واللقب في حقل واحد -->
                 <div class="form-group">
-                    <label for="firstName">الاسم</label>
-                    <input type="text" id="firstName" placeholder="أدخل اسمك" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="lastName">اللقب</label>
-                    <input type="text" id="lastName" placeholder="أدخل لقبك" required>
+                    <label for="fullName">الاسم الكامل</label>
+                    <input type="text" id="fullName" placeholder="أدخل اسمك الكامل" required>
                 </div>
                 
                 <div class="form-group">
@@ -1040,11 +1310,24 @@
                         <p>توصيل الطلبية إلى عنوانك</p>
                     </div>
                 </div>
+                
+                <!-- التعديل: إضافة قائمة شركات التوصيل -->
+                <div class="form-group">
+                    <label for="shippingCompany">اختيار شركة التوصيل (اختياري)</label>
+                    <select id="shippingCompany">
+                        <option value="">-- اختر شركة التوصيل --</option>
+                        <option value="Zrexpress">Zrexpress</option>
+                        <option value="Worldexpress">Worldexpress</option>
+                        <option value="Yalidin">Yalidin</option>
+                        <option value="Dhd">Dhd</option>
+                        <option value="kazitour">kazitour</option>
+                    </select>
+                </div>
             </div>
         </div>
         
         <!-- نقل قسم تفاصيل الطلبية إلى هنا (أسفل المحتوى الرئيسي) -->
-        <div class="card" style="margin-top: 30px;">
+        <div class="card" style="margin-top: 25px;">
             <h2><i class="fas fa-receipt"></i> تفاصيل الطلبية</h2>
             
             <div class="products-table">
@@ -1071,7 +1354,7 @@
                 </table>
             </div>
             
-            <div class="form-group" style="margin-top: 25px;">
+            <div class="form-group" style="margin-top: 20px;">
                 <label for="notes">ملاحظات إضافية</label>
                 <textarea id="notes" rows="3" placeholder="أي ملاحظات أو تعليمات إضافية"></textarea>
             </div>
@@ -1080,6 +1363,112 @@
         <div class="actions">
             <button class="btn btn-reset" id="resetBtn"><i class="fas fa-redo"></i> إعادة تعيين</button>
             <button class="btn btn-submit" id="submitBtn"><i class="fas fa-check-circle"></i> تأكيد الطلبية</button>
+        </div>
+        
+        <!-- قسم وصل تفاصيل الطلبية -->
+        <div class="receipt-container" id="receiptContainer">
+            <div class="receipt-header">
+                <h2 class="receipt-title">StoreDz - ستور ديزاد</h2>
+                <p class="receipt-subtitle">وصل تأكيد الطلبية</p>
+            </div>
+            
+            <div class="receipt-info">
+                <div class="customer-details">
+                    <h3>معلومات العميل</h3>
+                    <div class="detail-item">
+                        <span class="detail-label">الاسم الكامل:</span>
+                        <span class="detail-value" id="receiptFullName"></span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">رقم الهاتف:</span>
+                        <span class="detail-value" id="receiptPhone"></span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">الولاية:</span>
+                        <span class="detail-value" id="receiptState"></span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">البلدية:</span>
+                        <span class="detail-value" id="receiptCommune"></span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">نوع التوصيل:</span>
+                        <span class="detail-value" id="receiptDeliveryType"></span>
+                    </div>
+                    <!-- التعديل: إضافة شركة التوصيل في الوصل -->
+                    <div class="detail-item">
+                        <span class="detail-label">شركة التوصيل:</span>
+                        <span class="detail-value" id="receiptShippingCompany">تلقائي</span>
+                    </div>
+                </div>
+                
+                <div class="order-details">
+                    <h3>تفاصيل الطلبية</h3>
+                    <div class="detail-item">
+                        <span class="detail-label">رقم الطلبية:</span>
+                        <span class="detail-value" id="receiptOrderId"></span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">تاريخ الطلبية:</span>
+                        <span class="detail-value" id="receiptDate"></span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">حالة الطلبية:</span>
+                        <span class="detail-value" id="receiptStatus">في انتظار التجهيز</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">طريقة الدفع:</span>
+                        <span class="detail-value">الدفع عند الاستلام</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="receipt-products">
+                <h3>المنتجات المطلوبة</h3>
+                <div class="products-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>المنتج</th>
+                                <th>الكمية</th>
+                                <th>السعر</th>
+                                <th>المجموع</th>
+                            </tr>
+                        </thead>
+                        <tbody id="receiptProductsList">
+                            <!-- سيتم إضافة المنتجات هنا ديناميكيًا -->
+                        </tbody>
+                        <tfoot>
+                            <tr class="highlight-row">
+                                <td colspan="3" style="text-align: left;">مجموع المنتجات:</td>
+                                <td id="receiptProductsTotal">0.00 دج</td>
+                            </tr>
+                            <tr>
+                                <td colspan="3" style="text-align: left;">مصاريف التوصيل:</td>
+                                <td class="free-shipping" id="receiptShipping">0.00 دج (مجاني)</td>
+                            </tr>
+                            <tr class="highlight-row">
+                                <td colspan="3" style="text-align: left;">المجموع الإجمالي:</td>
+                                <td id="receiptTotalAmount">0.00 دج</td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+            
+            <div class="form-group" style="margin-top: 20px;">
+                <label for="receiptNotes">ملاحظات إضافية</label>
+                <textarea id="receiptNotes" rows="3" readonly></textarea>
+            </div>
+            
+            <div class="receipt-actions">
+                <button class="btn btn-print" id="printReceipt">
+                    <i class="fas fa-print"></i> طباعة الوصل
+                </button>
+                <button class="btn btn-back" id="backToOrder">
+                    <i class="fas fa-arrow-left"></i> الرجوع إلى الطلبية
+                </button>
+            </div>
         </div>
         
         <footer>
@@ -1197,6 +1586,7 @@
         let totalAmount = 0;
         let currentProductId = null;
         let editingProductId = null;
+        let shippingCompany = ""; // متغير لتخزين شركة التوصيل
         
         // عناصر DOM
         const stateSelect = document.getElementById('state');
@@ -1229,6 +1619,24 @@
         const backToProducts = document.getElementById('backToProducts');
         const helpButton = document.getElementById('helpButton');
         const contactButtons = document.getElementById('contactButtons');
+        const receiptContainer = document.getElementById('receiptContainer');
+        const receiptFullName = document.getElementById('receiptFullName');
+        const receiptPhone = document.getElementById('receiptPhone');
+        const receiptState = document.getElementById('receiptState');
+        const receiptCommune = document.getElementById('receiptCommune');
+        const receiptDeliveryType = document.getElementById('receiptDeliveryType');
+        const receiptShippingCompany = document.getElementById('receiptShippingCompany');
+        const receiptOrderId = document.getElementById('receiptOrderId');
+        const receiptDate = document.getElementById('receiptDate');
+        const receiptProductsList = document.getElementById('receiptProductsList');
+        const receiptProductsTotal = document.getElementById('receiptProductsTotal');
+        const receiptShipping = document.getElementById('receiptShipping');
+        const receiptTotalAmount = document.getElementById('receiptTotalAmount');
+        const receiptNotes = document.getElementById('receiptNotes');
+        const printReceipt = document.getElementById('printReceipt');
+        const backToOrder = document.getElementById('backToOrder');
+        const fullNameInput = document.getElementById('fullName');
+        const shippingCompanySelect = document.getElementById('shippingCompany');
         
         // تهيئة EmailJS
         (function() {
@@ -1268,11 +1676,11 @@
                 }
                 
                 productCard.innerHTML = `
-                    <div class="product-image">
+                    <div class="product-image clickable" data-id="${product.id}">
                         ${imageContent}
                     </div>
                     <div class="product-info">
-                        <div class="product-title">${product.name}</div>
+                        <div class="product-title clickable" data-id="${product.id}">${product.name}</div>
                         <div class="product-price">${product.price.toLocaleString()} دج</div>
                         <div class="product-quantity">
                             <button class="btn btn-remove decrease" data-id="${product.id}">
@@ -1287,24 +1695,26 @@
                 `;
                 productsSection.appendChild(productCard);
                 
-                // إضافة مستمع للنقر على صورة/أيقونة المنتج
-                const imageElement = productCard.querySelector('.product-image');
-                imageElement.addEventListener('click', () => {
-                    showProductDetail(product.id);
+                // إضافة مستمع للنقر على الصورة واسم المنتج
+                const imageElement = productCard.querySelector('.product-image.clickable');
+                const titleElement = productCard.querySelector('.product-title.clickable');
+                
+                imageElement.addEventListener('click', (e) => {
+                    showProductDetail(parseInt(e.currentTarget.dataset.id));
                 });
                 
-                // إضافة مستمع للنقر على اسم المنتج
-                const titleElement = productCard.querySelector('.product-title');
-                titleElement.addEventListener('click', () => {
-                    showProductDetail(product.id);
+                titleElement.addEventListener('click', (e) => {
+                    showProductDetail(parseInt(e.currentTarget.dataset.id));
                 });
-                
-                // إضافة مستمعين للأزرار
-                const increaseBtn = productCard.querySelector('.increase');
-                const decreaseBtn = productCard.querySelector('.decrease');
-                
-                increaseBtn.addEventListener('click', () => updateProductQuantity(product.id, 1));
-                decreaseBtn.addEventListener('click', () => updateProductQuantity(product.id, -1));
+            });
+            
+            // إضافة مستمعين للأزرار
+            document.querySelectorAll('.increase').forEach(btn => {
+                btn.addEventListener('click', () => updateProductQuantity(btn.dataset.id, 1));
+            });
+            
+            document.querySelectorAll('.decrease').forEach(btn => {
+                btn.addEventListener('click', () => updateProductQuantity(btn.dataset.id, -1));
             });
         }
         
@@ -1403,15 +1813,15 @@
         
         // إرسال الطلبية
         function submitOrder() {
-            const firstName = document.getElementById('firstName').value.trim();
-            const lastName = document.getElementById('lastName').value.trim();
+            const fullName = document.getElementById('fullName').value.trim();
             const phone = document.getElementById('phone').value.trim();
             const state = stateSelect.value;
             const commune = communeInput.value.trim();
             const notes = document.getElementById('notes').value.trim();
+            shippingCompany = shippingCompanySelect.value || "تلقائي"; // تخزين شركة التوصيل
             
             // التحقق من البيانات
-            if (!firstName || !lastName || !phone || !state || !commune) {
+            if (!fullName || !phone || !state || !commune) {
                 showNotification("الرجاء ملء جميع الحقول الإلزامية", true);
                 return;
             }
@@ -1426,8 +1836,6 @@
                 `${p.name} (${p.quantity} × ${p.price.toLocaleString()} دج)`
             ).join("\n");
             
-            const fullName = `${firstName} ${lastName}`;
-            
             // تحضير بيانات البريد
             const templateParams = {
                 to_email: "storedz.emailjs@gmail.com",
@@ -1436,6 +1844,7 @@
                 wilaya: state,
                 commune: commune,
                 delivery_type: deliveryType === "office" ? "مكتب الولاية" : "المنزل",
+                shipping_company: shippingCompany,
                 notes: notes || "لا توجد ملاحظات",
                 product: productsDetails,
                 total_amount: totalAmount.toLocaleString() + " دج",
@@ -1445,6 +1854,7 @@
                     الولاية: ${state}
                     البلدية: ${commune}
                     نوع التوصيل: ${deliveryType === "office" ? "مكتب الولاية" : "المنزل"}
+                    شركة التوصيل: ${shippingCompany}
                     السعر الإجمالي: ${totalAmount.toLocaleString()} دج
                     
                     المنتجات:
@@ -1462,12 +1872,13 @@
             var templateParams1 = {
                 name: templateParams.full_name,
                 message: templateParams.order_details,
-              };
+            };
+            
             // إرسال البريد باستخدام EmailJS
             emailjs.send("service_sie67wj", "template_lsn9ptu", templateParams1)
                 .then(function(response) {
                     showNotification("تم إرسال طلبك بنجاح!");
-                    resetForm();
+                    generateReceipt(fullName, phone, state, commune, notes);
                 }, function(error) {
                     showNotification("حدث خطأ أثناء إرسال الطلبية، الرجاء المحاولة لاحقاً", true);
                     console.error("خطأ في إرسال البريد:", error);
@@ -1476,6 +1887,59 @@
                     submitBtn.innerHTML = originalBtnText;
                     submitBtn.disabled = false;
                 });
+        }
+        
+        // توليد وصل الطلبية
+        function generateReceipt(fullName, phone, state, commune, notes) {
+            // تعبئة معلومات العميل
+            receiptFullName.textContent = fullName;
+            receiptPhone.textContent = phone;
+            receiptState.textContent = state;
+            receiptCommune.textContent = commune;
+            receiptDeliveryType.textContent = deliveryType === "office" ? "مكتب الولاية" : "المنزل";
+            receiptShippingCompany.textContent = shippingCompany; // عرض شركة التوصيل
+            receiptNotes.value = notes || "لا توجد ملاحظات";
+            
+            // توليد رقم طلبية عشوائي
+            const orderId = Math.floor(100000 + Math.random() * 900000);
+            receiptOrderId.textContent = `#${orderId}`;
+            
+            // تعبئة تاريخ الطلبية
+            const now = new Date();
+            const options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
+            receiptDate.textContent = now.toLocaleDateString('ar-EG', options);
+            
+            // تعبئة قائمة المنتجات
+            receiptProductsList.innerHTML = '';
+            let productsTotal = 0;
+            
+            products.forEach(product => {
+                const row = document.createElement('tr');
+                const total = product.price * product.quantity;
+                productsTotal += total;
+                
+                row.innerHTML = `
+                    <td>${product.name}</td>
+                    <td>${product.quantity}</td>
+                    <td>${product.price.toLocaleString()} دج</td>
+                    <td>${total.toLocaleString()} دج</td>
+                `;
+                receiptProductsList.appendChild(row);
+            });
+            
+            // تعبئة المبالغ
+            receiptProductsTotal.textContent = productsTotal.toLocaleString() + ' دج';
+            receiptShipping.textContent = '0.00 دج (مجاني)';
+            receiptTotalAmount.textContent = productsTotal.toLocaleString() + ' دج';
+            
+            // عرض قسم الوصل وإخفاء باقي المحتوى
+            document.querySelectorAll('.card, .actions, footer').forEach(el => {
+                el.style.display = 'none';
+            });
+            receiptContainer.style.display = 'block';
+            
+            // التمرير إلى أعلى الصفحة
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
         
         // إظهار الإشعار
@@ -1503,12 +1967,12 @@
         
         // إعادة تعيين النموذج
         function resetForm() {
-            document.getElementById('firstName').value = '';
-            document.getElementById('lastName').value = '';
+            document.getElementById('fullName').value = '';
             document.getElementById('phone').value = '';
             stateSelect.value = '';
             communeInput.value = '';
             document.getElementById('notes').value = '';
+            shippingCompanySelect.value = ''; // إعادة تعيين شركة التوصيل
             
             // إعادة تعيين المنتجات
             products = [];
@@ -1876,6 +2340,19 @@
             });
         }
         
+        // طباعة الوصل (التعديل: طباعة الوصل فقط)
+        function printReceiptFunction() {
+            window.print();
+        }
+        
+        // الرجوع إلى الطلبية
+        function backToOrderFunction() {
+            document.querySelectorAll('.card, .actions, footer').forEach(el => {
+                el.style.display = '';
+            });
+            receiptContainer.style.display = 'none';
+        }
+        
         // تهيئة التطبيق
         function initApp() {
             populateStates();
@@ -1909,6 +2386,10 @@
             helpButton.addEventListener('click', function() {
                 contactButtons.classList.toggle('show');
             });
+            
+            // إضافة مستمعين لوصل الطلبية
+            printReceipt.addEventListener('click', printReceiptFunction);
+            backToOrder.addEventListener('click', backToOrderFunction);
         }
         
         // بدء التطبيق عند تحميل الصفحة
