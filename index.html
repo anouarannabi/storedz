@@ -8,7 +8,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
     <style>
         * {
             margin: 0;
@@ -670,6 +669,7 @@
             line-height: 1.7;
             color: #4b5563;
             margin-bottom: 20px;
+            white-space: pre-line;
         }
         
         .detail-specs {
@@ -695,10 +695,12 @@
         .spec-name {
             font-weight: 700;
             color: #1a3a6d;
+            text-align: right;
         }
         
         .spec-value {
             color: #4b5563;
+            text-align: left;
         }
         
         .detail-actions {
@@ -753,6 +755,7 @@
         
         .product-manage-info {
             margin-bottom: 10px;
+            text-align: right;
         }
         
         .product-manage-name {
@@ -771,6 +774,7 @@
         .product-manage-actions {
             display: flex;
             gap: 6px;
+            justify-content: flex-end;
         }
         
         .edit-form {
@@ -1154,6 +1158,130 @@
         #shippingCompany option {
             padding: 8px;
         }
+
+        /* معرض الصور - التعديلات المطلوبة */
+        .product-gallery {
+            margin: 20px 0;
+            width: 100%;
+        }
+
+        .gallery-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin: 15px 0;
+        }
+
+        .gallery-slide {
+            width: 100%;
+            height: 400px; /* زيادة الحجم */
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            background: #f8f9fa;
+        }
+
+        .gallery-slide img {
+            max-width: 115%; /* زيادة الحجم بنسبة 15% */
+            max-height: 115%; /* زيادة الحجم بنسبة 15% */
+            object-fit: contain;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-nav-bottom {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 10px 0;
+        }
+
+        .gallery-nav {
+            background: #1a3a6d;
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            transition: all 0.3s;
+        }
+
+        .gallery-nav:hover {
+            background: #2c5282;
+            transform: scale(1.1);
+        }
+
+        .gallery-thumbnails {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 15px;
+        }
+
+        .gallery-thumbnail {
+            width: 70px;
+            height: 70px;
+            object-fit: cover;
+            border-radius: 8px;
+            cursor: pointer;
+            opacity: 0.7;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .gallery-thumbnail:hover,
+        .gallery-thumbnail.active {
+            opacity: 1;
+            border-color: #1a3a6d;
+        }
+
+        @media (max-width: 768px) {
+            .gallery-slide {
+                height: 345px; /* 300 * 1.15 = 345 */
+            }
+            
+            .gallery-slide img {
+                max-width: 115%;
+                max-height: 115%;
+            }
+            
+            .gallery-thumbnail {
+                width: 57.5px; /* 50 * 1.15 = 57.5 */
+                height: 57.5px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .gallery-slide {
+                height: 287.5px; /* 250 * 1.15 = 287.5 */
+            }
+            
+            .gallery-slide img {
+                max-width: 115%;
+                max-height: 115%;
+            }
+            
+            .gallery-thumbnail {
+                width: 46px; /* 40 * 1.15 = 46 */
+                height: 46px;
+            }
+            
+            .gallery-nav {
+                width: 46px; /* 40 * 1.15 = 46 */
+                height: 46px;
+                font-size: 16px; /* 14 * 1.15 ≈ 16 */
+            }
+        }
     </style>
 </head>
 <body>
@@ -1208,6 +1336,21 @@
                         <div class="detail-info">
                             <div class="detail-price" id="productDetailPrice"></div>
                             <p class="detail-description" id="productDetailDescription"></p>
+                            
+                            <!-- معرض الصور - التعديلات المطلوبة -->
+                            <div class="product-gallery" id="productGallery" style="display: none;">
+                                <h3 class="spec-title">معرض الصور</h3>
+                                <div class="gallery-container">
+                                    <div class="gallery-slide">
+                                        <img id="galleryImage" src="" alt="صورة المنتج">
+                                    </div>
+                                    <div class="gallery-nav-bottom">
+                                        <button class="gallery-nav gallery-prev"><i class="fas fa-chevron-right"></i></button>
+                                        <button class="gallery-nav gallery-next"><i class="fas fa-chevron-left"></i></button>
+                                    </div>
+                                </div>
+                                <div class="gallery-thumbnails" id="galleryThumbnails"></div>
+                            </div>
                             
                             <div class="detail-specs">
                                 <h3 class="spec-title">مواصفات المنتج</h3>
@@ -1454,14 +1597,14 @@
 
     <script>
         const algerianStates = [
-            "01 - أدرار", "02 - الشلف", "03 - الأغواط", "04 - أم البواقي", "05 - باتنة",
+            "01 - أدرار", "02 - الشلف", "03 - الأغواط", "04 - أم البواقi", "05 - باتنة",
             "06 - بجاية", "07 - بسكرة", "08 - بشار", "09 - البليدة", "10 - البويرة",
             "11 - تمنراست", "12 - تبسة", "13 - تلمسان", "14 - تيارت", "15 - تيزي وزو",
-            "16 - الجزائر", "17 - الجلفة", "18 - جيجل", "19 - سطيف", "20 - سعيدة",
-            "21 - سكيكدة", "22 - سيدي بلعباس", "23 - عنابة", "24 - قالمة", "25 - قسنطينة",
-            "26 - المدية", "27 - مستغانم", "28 - المسيلة", "29 - معسكر", "30 - ورقلة",
+            "16 - الجزائر", "17 - الجلفة", "18 - جيجل", "19 - سطيف", "20 - سعida",
+            "21 - سكيكدة", "22 - سidi بلعباس", "23 - عنابة", "24 - قالمة", "25 - قسنطينة",
+            "26 - المدية", "27 - مستغانm", "28 - المسيلة", "29 - معسكر", "30 - ورقلة",
             "31 - وهران", "32 - البيض", "33 - إيليزي", "34 - برج بوعريريج", "35 - بومرداس",
-            "36 - الطارف", "37 - تندوف", "38 - تيسمسيلت", "39 - الوادي", "40 - خنشلة",
+            "36 - الطارف", "37 - تندوف", "38 - تيسمسيلt", "39 - الوادي", "40 - خنشلة",
             "41 - سوق أهراس", "42 - تيبازة", "43 - ميلة", "44 - عين الدفلى", "45 - النعامة",
             "46 - عين تموشنت", "47 - غرداية", "48 - غليزان", "49 - تيميمون", "50 - برج باجي مختار",
             "51 - أولاد جلال", "52 - بني عباس", "53 - عين صالح", "54 - عين قزام", "55 - تقرت",
@@ -1470,42 +1613,29 @@
 
         const icons = [
             "fa-mobile-alt", "fa-laptop", "fa-headphones", "fa-tv", "fa-camera",
-            "fa-gamepad", "fa-tablet-alt", "fa-watch", "fa-keyboard", "fa-mouse"
+            "fa-gamepad", "fa-tablet-alt", "fa-watch", "fa-keyboard", "fa-mouse", "fa-spray-can"
         ];
         
-        // تم حذف المنتجات وترك فقط الهاتف والسماعات
+        // تم حذف المنتجات وترك فقط معطر الجو EYFEL
         let availableProducts = [
             { 
-                id: 1, 
-                name: "هاتف ذكي", 
-                price: 25000, 
-                icon: "fa-mobile-alt",
-                image: null,
-                description: "هاتف ذكي حديث مع شاشة 6.5 بوصة، كاميرا خلفية 48 ميجابكسل، ذاكرة 128 جيجابايت، وبطارية 5000 مللي أمبير. يعمل بنظام أندرويد 12 مع معالج سريع.",
+                id: 4, 
+                name: "EYFEL معطر الجو الفاخر", 
+                price: 1500, 
+                icon: "fa-spray-can",
+                image: "https://raw.githubusercontent.com/anouarannabi/picture/refs/heads/main/20250820_175554.jpg",
+                description: "🌸 EYFEL معطر الجو الفاخر 🌸\n🛍️ متوفر الآن بالجملة – أصلي %100 – روائح ساحرة تدوم طويلاً وتمنح منزلك أو مكتبك لمسة من الفخامة والرقي.\n\n💎 المميزات:\n-منتج تركي أصلي بجودة عالية.\n-روائح قوية وثابتة تدوم لأيام.\n-تصميم أنيق يزين أي مكان.\nمثالي للاستخدام في المنزل، المكتب، المحلات أو الهدايا🎁",
                 specs: [
-                    { name: "الشاشة", value: "6.5 بوصة" },
-                    { name: "الكاميرا", value: "48 ميجابكسل" },
-                    { name: "الذاكرة", value: "128 جيجابايت" },
-                    { name: "البطارية", value: "5000 مللي أمبير" },
-                    { name: "نظام التشغيل", value: "أندرويد 12" }
+                    { name: "النوع", value: "معطر جو" },
+                    { name: "الأصل", value: "تركي" },
+                    { name: "مدة التبخير", value: "أيام" },
+                    { name: "الاستخدام", value: "المنزل، المكتب، المحلات، الهدايا" }
                 ],
-                link: "product-1"
-            },
-            { 
-                id: 3, 
-                name: "سماعات", 
-                price: 5000, 
-                icon: "fa-headphones",
-                image: null,
-                description: "سماعات رأس لاسلكية بتقنية البلوتوث 5.0، مع إلغاء الضوضاء النشط، بطارية تدوم حتى 30 ساعة، ومقاومة للعرق. جودة صوت استثنائية.",
-                specs: [
-                    { name: "النوع", value: "لاسلكي" },
-                    { name: "تقنية", value: "بلوتوث 5.0" },
-                    { name: "مدة البطارية", value: "30 ساعة" },
-                    { name: "إلغاء الضوضاء", value: "نعم" },
-                    { name: "اللون", value: "أسود" }
+                gallery: [
+                    "https://raw.githubusercontent.com/anouarannabi/picture/refs/heads/main/20250820_173447.jpg",
+                    "https://raw.githubusercontent.com/anouarannabi/picture/refs/heads/main/20250820_173501.jpg"
                 ],
-                link: "product-3"
+                link: "product-4"
             }
         ];
         
@@ -1515,6 +1645,8 @@
         let currentProductId = null;
         let editingProductId = null;
         let shippingCompany = "";
+        let currentGalleryIndex = 0;
+        let currentGalleryImages = [];
         
         const stateSelect = document.getElementById('state');
         const communeInput = document.getElementById('commune');
@@ -1563,10 +1695,11 @@
         const receiptProductsDetails = document.getElementById('receiptProductsDetails');
         const receiptOrderNumber = document.getElementById('receiptOrderNumber');
         const receiptTotalAmount = document.getElementById('receiptTotalAmount');
-        
-        (function() {
-            emailjs.init("lZq4RDDeEs6nA3gxf");
-        })();
+        const productGallery = document.getElementById('productGallery');
+        const galleryImage = document.getElementById('galleryImage');
+        const galleryThumbnails = document.getElementById('galleryThumbnails');
+        const galleryPrev = document.querySelector('.gallery-prev');
+        const galleryNext = document.querySelector('.gallery-next');
         
         function populateStates() {
             algerianStates.forEach(state => {
@@ -1776,24 +1909,15 @@
             const originalBtnText = submitBtn.innerHTML;
             submitBtn.innerHTML = '<span class="loading-spinner"></span> جاري الإرسال...';
             submitBtn.disabled = true;
-
-            var templateParams1 = {
-                name: templateParams.full_name,
-                message: templateParams.order_details,
-            };
             
-            emailjs.send("service_sie67wj", "template_lsn9ptu", templateParams1)
-                .then(function(response) {
-                    showNotification("تم إرسال طلبك بنجاح!");
-                    generateReceipt(fullName, phone, state, commune, notes);
-                }, function(error) {
-                    showNotification("حدث خطأ أثناء إرسال الطلبية، الرجاء المحاولة لاحقاً", true);
-                    console.error("خطأ في إرسال البريد:", error);
-                })
-                .finally(() => {
-                    submitBtn.innerHTML = originalBtnText;
-                    submitBtn.disabled = false;
-                });
+            // تم تعطيل إرسال البريد الإلكتروني للتجربة
+            setTimeout(() => {
+                showNotification("تم إرسال طلبك بنجاح!");
+                generateReceipt(fullName, phone, state, commune, notes);
+                
+                submitBtn.innerHTML = originalBtnText;
+                submitBtn.disabled = false;
+            }, 1500);
         }
         
         function generateReceipt(fullName, phone, state, commune, notes) {
@@ -1921,6 +2045,7 @@
                 specs: [
                     { name: "المواصفات", value: "تفاصيل غير متوفرة" }
                 ],
+                gallery: [],
                 link: newLink
             };
             
@@ -1942,39 +2067,26 @@
         
         function resetProducts() {
             if (confirm('هل تريد حقاً إعادة تعيين المنتجات إلى الحالة الافتراضية؟')) {
-                // تم تحديث المنتجات لتحتوي فقط على الهاتف والسماعات
+                // تم تحديث المنتجات لتحتوي فقط على معطر الجو EYFEL
                 availableProducts = [
                     { 
-                        id: 1, 
-                        name: "هاتف ذكي", 
-                        price: 25000, 
-                        icon: "fa-mobile-alt",
-                        image: null,
-                        description: "هاتف ذكي حديث مع شاشة 6.5 بوصة، كاميرا خلفية 48 ميجابكسل، ذاكرة 128 جيجابايت، وبطارية 5000 مللي أمبير. يعمل بنظام أندرويد 12 مع معالج سريع.",
+                        id: 4, 
+                        name: "EYFEL معطر الجو الفاخر", 
+                        price: 1500, 
+                        icon: "fa-spray-can",
+                        image: "https://raw.githubusercontent.com/anouarannabi/picture/refs/heads/main/20250820_175554.jpg",
+                        description: "🌸 EYFEL معطر الجو الفاخر 🌸\n🛍️ متوفر الآن بالجملة – أصلي %100 – روائح ساحرة تدوم طويلاً وتمنح منزلك أو مكتبك لمسة من الفخامة والرقي.\n\n💎 المميزات:\n-منتج تركي أصلي بجودة عالية.\n-روائح قوية وثابتة تدوم لأيام.\n-تصميم أنيق يزين أي مكان.\nمثالي للاستخدام في المنزل، المكتب، المحلات أو الهدايا🎁",
                         specs: [
-                            { name: "الشاشة", value: "6.5 بوصة" },
-                            { name: "الكاميرا", value: "48 ميجابكسل" },
-                            { name: "الذاكرة", value: "128 جيجابايت" },
-                            { name: "البطارية", value: "5000 مللي أمبير" },
-                            { name: "نظام التشغيل", value: "أندرويد 12" }
+                            { name: "النوع", value: "معطر جو" },
+                            { name: "الأصل", value: "تركي" },
+                            { name: "مدة التبخير", value: "أيام" },
+                            { name: "الاستخدام", value: "المنزل، المكتب، المحلات، الهدايا" }
                         ],
-                        link: "product-1"
-                    },
-                    { 
-                        id: 3, 
-                        name: "سماعات", 
-                        price: 5000, 
-                        icon: "fa-headphones",
-                        image: null,
-                        description: "سماعات رأس لاسلكية بتقنية البلوتوث 5.0، مع إلغاء الضوضاء النشط، بطارية تدوم حتى 30 ساعة، ومقاومة للعرق. جودة صوت استثنائية.",
-                        specs: [
-                            { name: "النوع", value: "لاسلكي" },
-                            { name: "تقنية", value: "بلوتوث 5.0" },
-                            { name: "مدة البطارية", value: "30 ساعة" },
-                            { name: "إلغاء الضوضاء", value: "نعم" },
-                            { name: "اللون", value: "أسود" }
+                        gallery: [
+                            "https://raw.githubusercontent.com/anouarannabi/picture/refs/heads/main/20250820_173447.jpg",
+                            "https://raw.githubusercontent.com/anouarannabi/picture/refs/heads/main/20250820_173501.jpg"
                         ],
-                        link: "product-3"
+                        link: "product-4"
                     }
                 ];
                 
@@ -1982,6 +2094,34 @@
                 displayProductsManagement();
                 resetForm();
                 showNotification("تمت إعادة تعيين المنتجات بنجاح!");
+            }
+        }
+        
+        // إعداد معرض الصور مرة واحدة فقط
+        function setupGalleryNavigation() {
+            galleryPrev.addEventListener('click', () => {
+                if (currentGalleryImages.length > 0) {
+                    currentGalleryIndex = (currentGalleryIndex - 1 + currentGalleryImages.length) % currentGalleryImages.length;
+                    updateGalleryDisplay();
+                }
+            });
+            
+            galleryNext.addEventListener('click', () => {
+                if (currentGalleryImages.length > 0) {
+                    currentGalleryIndex = (currentGalleryIndex + 1) % currentGalleryImages.length;
+                    updateGalleryDisplay();
+                }
+            });
+        }
+        
+        function updateGalleryDisplay() {
+            if (currentGalleryImages.length > 0) {
+                galleryImage.src = currentGalleryImages[currentGalleryIndex];
+                
+                // تحديث التصغيرات النشطة
+                document.querySelectorAll('.gallery-thumbnail').forEach((thumb, index) => {
+                    thumb.classList.toggle('active', index === currentGalleryIndex);
+                });
             }
         }
         
@@ -2002,6 +2142,32 @@
             }
             
             productDetailDescription.textContent = product.description;
+            
+            // معرض الصور
+            if (product.gallery && product.gallery.length > 0) {
+                productGallery.style.display = 'block';
+                currentGalleryImages = product.gallery;
+                currentGalleryIndex = 0;
+                
+                // عرض الصورة الأولى
+                galleryImage.src = product.gallery[0];
+                
+                // إنشاء التصغيرات
+                galleryThumbnails.innerHTML = '';
+                product.gallery.forEach((img, index) => {
+                    const thumbnail = document.createElement('img');
+                    thumbnail.src = img;
+                    thumbnail.className = 'gallery-thumbnail';
+                    if (index === 0) thumbnail.classList.add('active');
+                    thumbnail.addEventListener('click', () => {
+                        currentGalleryIndex = index;
+                        updateGalleryDisplay();
+                    });
+                    galleryThumbnails.appendChild(thumbnail);
+                });
+            } else {
+                productGallery.style.display = 'none';
+            }
             
             productSpecs.innerHTML = '';
             product.specs.forEach(spec => {
@@ -2207,6 +2373,9 @@
             displayAvailableProducts();
             updateCartDisplay();
             displayProductsManagement();
+            
+            // إعداد معرض الصور مرة واحدة فقط
+            setupGalleryNavigation();
             
             checkProductLink();
             
