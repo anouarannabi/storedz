@@ -9,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
+        /* أنماط CSS الحالية تبقى كما هي */
         * {
             margin: 0;
             padding: 0;
@@ -855,6 +856,7 @@
             font-size: 8px;
             font-weight: bold;
             margin-bottom: 2px;
+            line-height: 1;
         }
         
         .help-button i {
@@ -1072,6 +1074,7 @@
         .detail-label {
             font-weight: 700;
             color: #1a3a6d;
+            text-align: right;
         }
         
         .detail-value {
@@ -1081,6 +1084,7 @@
         
         .receipt-products {
             margin: 25px 0;
+            overflow-x: auto;
         }
         
         .receipt-products h3 {
@@ -1103,12 +1107,14 @@
             background: linear-gradient(90deg, #1a3a6d 0%, #2c5282 100%);
             padding: 12px 25px;
             font-size: 1.1rem;
+            min-width: 140px;
         }
         
         .btn-back {
             background: linear-gradient(90deg, #4b5563 0%, #9ca3af 100%);
             padding: 12px 25px;
             font-size: 1.1rem;
+            min-width: 140px;
         }
         
         .highlight-row {
@@ -1135,6 +1141,9 @@
                 width: 100%;
                 box-shadow: none;
                 border: none;
+            }
+            .btn-print, .btn-back {
+                display: none;
             }
         }
         
@@ -1282,6 +1291,184 @@
                 font-size: 16px; /* 14 * 1.15 ≈ 16 */
             }
         }
+
+        /* تنسيق عرض السعر الجديد - التعديلات المطلوبة */
+        .price-offer {
+            background: linear-gradient(135deg, #fff9ed 0%, #ffefd9 100%);
+            border: 2px solid #ffd166;
+            border-radius: 8px;
+            padding: 10px 15px;
+            margin: 15px 0;
+            text-align: center;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+        }
+
+        .price-title {
+            font-size: 0.95rem;
+            color: #d35400;
+            margin-bottom: 8px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+        }
+
+        .price-title i {
+            color: #e74c3c;
+            font-size: 1rem;
+        }
+
+        .price-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 5px;
+            flex-wrap: wrap;
+        }
+
+        .price-old {
+            font-size: 1rem;
+            color: #e74c3c;
+            text-decoration: line-through;
+            font-weight: 600;
+        }
+
+        .price-new {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: #27ae60;
+        }
+
+        .discount-badge {
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+            color: white;
+            padding: 3px 8px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+
+        .offer-note {
+            font-size: 0.85rem;
+            color: #e67e22;
+            margin-top: 5px;
+            font-weight: 600;
+        }
+
+        /* عرض التخفيض في قائمة المنتجات */
+        .product-offer {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 3px;
+            margin: 6px 0;
+        }
+
+        .product-old-price {
+            font-size: 0.9rem;
+            color: #e74c3c;
+            text-decoration: line-through;
+            font-weight: 600;
+        }
+
+        .product-new-price {
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: #27ae60;
+        }
+
+        .product-discount-badge {
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+            color: white;
+            padding: 2px 6px;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            margin-top: 3px;
+        }
+
+        @media (max-width: 480px) {
+            .price-container {
+                flex-direction: row;
+                gap: 8px;
+            }
+            
+            .price-new {
+                font-size: 1.2rem;
+            }
+            
+            .price-title {
+                font-size: 0.9rem;
+            }
+            
+            .product-offer {
+                gap: 2px;
+            }
+            
+            .product-old-price {
+                font-size: 0.8rem;
+            }
+            
+            .product-new-price {
+                font-size: 1rem;
+            }
+            
+            .product-discount-badge {
+                font-size: 0.65rem;
+                padding: 1px 5px;
+            }
+        }
+        
+        /* إضافة أنماط لأزرار التنقل بين الصفحات */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .page-btn {
+            background: linear-gradient(90deg, #1a3a6d 0%, #2c5282 100%);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 700;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            min-width: 40px;
+        }
+        
+        .page-btn:hover {
+            opacity: 0.92;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .page-btn.active {
+            background: linear-gradient(90deg, #166534 0%, #22c55e 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+        
+        .page-btn.disabled {
+            background: linear-gradient(90deg, #9ca3af 0%, #6b7280 100%);
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
     </style>
 </head>
 <body>
@@ -1335,6 +1522,24 @@
                         
                         <div class="detail-info">
                             <div class="detail-price" id="productDetailPrice"></div>
+                            
+                            <!-- قسم عرض السعر الجديد - التعديلات المطلوبة -->
+                            <div class="price-offer" id="priceOffer" style="display: none;">
+                                <div class="price-title">
+                                    <i class="fas fa-tag"></i>
+                                    <span>عرض خاص لفترة محدودة</span>
+                                </div>
+                                <div class="price-container">
+                                    <span class="price-old" id="oldPrice">1500 دج</span>
+                                    <span class="price-new" id="newPrice">950 دج</span>
+                                    <span class="discount-badge">تخفيض -37%</span>
+                                </div>
+                                <div class="offer-note">
+                                    <i class="fas fa-bolt"></i>
+                                    وفر 550 دج عند الشراء الآن
+                                </div>
+                            </div>
+                            
                             <p class="detail-description" id="productDetailDescription"></p>
                             
                             <!-- معرض الصور - التعديلات المطلوبة -->
@@ -1450,6 +1655,7 @@
                         <option value="Dhd">Dhd</option>
                         <option value="kazitour">kazitour</option>
                     </select>
+                    <small style="display: block; margin-top: 5px; color: #6b7280;">إذا لم تختر شركة توصيل، سيتم اختيارها تلقائياً</small>
                 </div>
             </div>
         </div>
@@ -1597,14 +1803,14 @@
 
     <script>
         const algerianStates = [
-            "01 - أدرار", "02 - الشلف", "03 - الأغواط", "04 - أم البواقi", "05 - باتنة",
+            "01 - أدرار", "02 - الشلف", "03 - الأغواط", "04 - أم البواقي", "05 - باتنة",
             "06 - بجاية", "07 - بسكرة", "08 - بشار", "09 - البليدة", "10 - البويرة",
             "11 - تمنراست", "12 - تبسة", "13 - تلمسان", "14 - تيارت", "15 - تيزي وزو",
-            "16 - الجزائر", "17 - الجلفة", "18 - جيجل", "19 - سطيف", "20 - سعida",
-            "21 - سكيكدة", "22 - سidi بلعباس", "23 - عنابة", "24 - قالمة", "25 - قسنطينة",
-            "26 - المدية", "27 - مستغانm", "28 - المسيلة", "29 - معسكر", "30 - ورقلة",
+            "16 - الجزائر", "17 - الجلفة", "18 - جيجل", "19 - سطيف", "20 - سعيدة",
+            "21 - سكيكدة", "22 - سيدي بلعباس", "23 - عنابة", "24 - قالمة", "25 - قسنطينة",
+            "26 - المدية", "27 - مستغانم", "28 - المسيلة", "29 - معسكر", "30 - ورقلة",
             "31 - وهران", "32 - البيض", "33 - إيليزي", "34 - برج بوعريريج", "35 - بومرداس",
-            "36 - الطارف", "37 - تندوف", "38 - تيسمسيلt", "39 - الوادي", "40 - خنشلة",
+            "36 - الطارف", "37 - تندوف", "38 - تيسمسيلت", "39 - الوادي", "40 - خنشلة",
             "41 - سوق أهراس", "42 - تيبازة", "43 - ميلة", "44 - عين الدفلى", "45 - النعامة",
             "46 - عين تموشنت", "47 - غرداية", "48 - غليزان", "49 - تيميمون", "50 - برج باجي مختار",
             "51 - أولاد جلال", "52 - بني عباس", "53 - عين صالح", "54 - عين قزام", "55 - تقرت",
@@ -1616,12 +1822,81 @@
             "fa-gamepad", "fa-tablet-alt", "fa-watch", "fa-keyboard", "fa-mouse", "fa-spray-can"
         ];
         
-        // تم حذف المنتجات وترك فقط معطر الجو EYFEL
-        let availableProducts = [
+        // إضافة 10 منتجات إلكترونية جديدة
+        const electronicProducts = [
+            { 
+                id: 1, 
+                name: "هاتف Samsung Galaxy S20", 
+                price: 35000, 
+                oldPrice: 70000,
+                icon: "fa-mobile-alt",
+                image: "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+                description: "هاتف Samsung Galaxy S20 بحالة ممتازة، شاشة 6.2 بوصة، كاميرا 64 ميجابكسل، ذاكرة 8GB، تخزين 128GB. الجهاز بحالة جيدة جداً ويعمل بكفاءة عالية.",
+                specs: [
+                    { name: "النوع", value: "هاتف ذكي" },
+                    { name: "الحالة", value: "مستعمل - جيد جداً" },
+                    { name: "الشاشة", value: "6.2 بوصة" },
+                    { name: "التخزين", value: "128GB" },
+                    { name: "الذاكرة", value: "8GB" },
+                    { name: "الكاميرا", value: "64 ميجابكسل" }
+                ],
+                gallery: [
+                    "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+                    "https://images.unsplash.com/photo-1616348436168-de43ad0db179?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+                ],
+                link: "product-1",
+                hasOffer: true
+            },
+            { 
+                id: 2, 
+                name: "لابتوب Dell XPS 13", 
+                price: 120000, 
+                oldPrice: 220000,
+                icon: "fa-laptop",
+                image: "https://images.unsplash.com/photo-1593642702821-c8da6771f0c6?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+                description: "لابتوب Dell XPS 13 بحالة ممتازة، معالج Core i7، ذاكرة 16GB، مساحة تخزين 512GB SSD، شاشة 13.3 بوصة. الجهاز يعمل بكفاءة عالية ومناسب للأعمال والدراسة.",
+                specs: [
+                    { name: "النوع", value: "لابتوب" },
+                    { name: "الحالة", value: "مستعمل - جيد جداً" },
+                    { name: "الشاشة", value: "13.3 بوصة" },
+                    { name: "المعالج", value: "Core i7" },
+                    { name: "الذاكرة", value: "16GB" },
+                    { name: "التخزين", value: "512GB SSD" }
+                ],
+                gallery: [
+                    "https://images.unsplash.com/photo-1593642702821-c8da6771f0c6?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+                    "https://images.unsplash.com/photo-1593642632823-8f785ba67e45?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+                ],
+                link: "product-2",
+                hasOffer: true
+            },
+            { 
+                id: 3, 
+                name: "ساعة Apple Watch Series 6", 
+                price: 45000, 
+                oldPrice: 90000,
+                icon: "fa-watch",
+                image: "https://images.unsplash.com/photo-1579586337278-3befd40fd17a?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+                description: "ساعة Apple Watch Series 6 بحالة ممتازة، شاشة Retina، مقاومة للماء، تتبع اللياقة البدنية، توصيل بالهاتف. الساعة تعمل بكفاءة وبطاريتها تدوم ليوم كامل.",
+                specs: [
+                    { name: "النوع", value: "ساعة ذكية" },
+                    { name: "الحالة", value: "مستعمل - جيد جداً" },
+                    { name: "الشاشة", value: "Retina" },
+                    { name: "الميزات", value: "مقاومة للماء، تتبع اللياقة" },
+                    { name: "البطارية", value: "يوم كامل" }
+                ],
+                gallery: [
+                    "https://images.unsplash.com/photo-1579586337278-3befd40fd17a?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+                    "https://images.unsplash.com/photo-1546868871-7041f2a55e12?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+                ],
+                link: "product-3",
+                hasOffer: true
+            },
             { 
                 id: 4, 
                 name: "EYFEL معطر الجو الفاخر", 
-                price: 1500, 
+                price: 950, 
+                oldPrice: 1500,
                 icon: "fa-spray-can",
                 image: "https://raw.githubusercontent.com/anouarannabi/picture/refs/heads/main/20250820_175554.jpg",
                 description: "🌸 EYFEL معطر الجو الفاخر 🌸\n🛍️ متوفر الآن بالجملة – أصلي %100 – روائح ساحرة تدوم طويلاً وتمنح منزلك أو مكتبك لمسة من الفخامة والرقي.\n\n💎 المميزات:\n-منتج تركي أصلي بجودة عالية.\n-روائح قوية وثابتة تدوم لأيام.\n-تصميم أنيق يزين أي مكان.\nمثالي للاستخدام في المنزل، المكتب، المحلات أو الهدايا🎁",
@@ -1635,9 +1910,146 @@
                     "https://raw.githubusercontent.com/anouarannabi/picture/refs/heads/main/20250820_173447.jpg",
                     "https://raw.githubusercontent.com/anouarannabi/picture/refs/heads/main/20250820_173501.jpg"
                 ],
-                link: "product-4"
+                link: "product-4",
+                hasOffer: true
+            },
+            { 
+                id: 5, 
+                name: "كاميرا Canon EOS 5D", 
+                price: 180000, 
+                oldPrice: 320000,
+                icon: "fa-camera",
+                image: "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+                description: "كاميرا Canon EOS 5D Mark IV بحالة جيدة جداً، 30.4 ميجابكسل، فيديو 4K، شاشة LCD. الكاميرا تعمل بكفاءة وتأتي مع عدسة 24-105mm.",
+                specs: [
+                    { name: "النوع", value: "كاميرا DSLR" },
+                    { name: "الحالة", value: "مستعمل - جيد جداً" },
+                    { name: "الدقة", value: "30.4 ميجابكسل" },
+                    { name: "الفيدéo", value: "4K" },
+                    { name: "الشاشة", value: "LCD" }
+                ],
+                gallery: [
+                    "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+                    "https://images.unsplash.com/photo-1502920917128-1aa500764cbd?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+                ],
+                link: "product-5",
+                hasOffer: true
+            },
+            { 
+                id: 6, 
+                name: "سماعات Sony WH-1000XM4", 
+                price: 40000, 
+                oldPrice: 80000,
+                icon: "fa-headphones",
+                image: "https://images.unsplash.com/photo-1546435770-a3e426bf472b?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+                description: "سماعات Sony WH-1000XM4 لاسلكية، بتقنية إلغاء الضوضاء، بطارية تدوم حتى 30 ساعة، جودة صوت استثنائية. السماعات بحالة ممتازة وتأتي مع علبتها الأصلية.",
+                specs: [
+                    { name: "النوع", value: "سماعات لاسلكية" },
+                    { name: "الحالة", value: "مستعمل - جيد جداً" },
+                    { name: "تقنية", value: "إلغاء الضوضاء" },
+                    { name: "البطارية", value: "30 ساعة" },
+                    { name: "التوصيل", value: "بلوتوث" }
+                ],
+                gallery: [
+                    "https://images.unsplash.com/photo-1546435770-a3e426bf472b?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+                    "https://images.unsplash.com/photo-1583394838336-acd977736f90?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+                ],
+                link: "product-6",
+                hasOffer: true
+            },
+            { 
+                id: 7, 
+                name: "آيباد برو 11 إنش", 
+                price: 80000, 
+                oldPrice: 150000,
+                icon: "fa-tablet-alt",
+                image: "https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+                description: "آيباد برو 11 إنش بحالة ممتازة، شاشة Retina، معالج A12Z Bionic، مساحة تخزين 256GB. الجهاز يعمل بكفاءة عالية ومناسب للعمل والتصميم.",
+                specs: [
+                    { name: "النوع", value: "تابلت" },
+                    { name: "الحالة", value: "مستعمل - جيد جداً" },
+                    { name: "الشاشة", value: "11 إنش Retina" },
+                    { name: "المعالج", value: "A12Z Bionic" },
+                    { name: "التخزين", value: "256GB" }
+                ],
+                gallery: [
+                    "https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+                    "https://images.unsplash.com/photo-1561154464-82e9adf32764?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+                ],
+                link: "product-7",
+                hasOffer: true
+            },
+            { 
+                id: 8, 
+                name: "بلايستيشن 5", 
+                price: 120000, 
+                oldPrice: 200000,
+                icon: "fa-gamepad",
+                image: "https://images.unsplash.com/photo-1606813907291-d86efa9b94db?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+                description: "بلايستيشن 5 بحالة جيدة جداً، مع وحدة تحكم لاسلكية، دعم الألعاب بدقة 4K، تخزين 825GB. الجهاز يعمل بكفاءة ويأتي مع عدة ألعاب مجانية.",
+                specs: [
+                    { name: "النوع", value: "console ألعاب" },
+                    { name: "الحالة", value: "مستعمل - جيد جداً" },
+                    { name: "الدقة", value: "4K" },
+                    { name: "التخزين", value: "825GB" },
+                    { name: "التحكم", value: "لاسلكي" }
+                ],
+                gallery: [
+                    "https://images.unsplash.com/photo-1606813907291-d86efa9b94db?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+                    "https://images.unsplash.com/photo-1606144042614-b2417e99c4e3?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+                ],
+                link: "product-8",
+                hasOffer: true
+            },
+            { 
+                id: 9, 
+                name: "ماك بوك برو M1", 
+                price: 180000, 
+                oldPrice: 300000,
+                icon: "fa-laptop",
+                image: "https://images.unsplash.com/photo-1541807084-5c52b6b3adef?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+                description: "ماك بوك برو بشريحة M1، شاشة 13 إنش، ذاكرة 8GB، مساحة تخزين 256GB SSD. الجهاز بحالة ممتازة وأدائه سريع جداً.",
+                specs: [
+                    { name: "النوع", value: "لابتوب" },
+                    { name: "الحالة", value: "مستعمل - جيد جداً" },
+                    { name: "الشاشة", value: "13 إنش" },
+                    { name: "المعالج", value: "M1" },
+                    { name: "الذاكرة", value: "8GB" },
+                    { name: "التخزين", value: "256GB SSD" }
+                ],
+                gallery: [
+                    "https://images.unsplash.com/photo-1541807084-5c52b6b3adef?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+                    "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+                ],
+                link: "product-9",
+                hasOffer: true
+            },
+            { 
+                id: 10, 
+                name: "ساعة سامسونج جالاكسي واتش", 
+                price: 35000, 
+                oldPrice: 70000,
+                icon: "fa-watch",
+                image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+                description: "ساعة سامسونج جالاكسي واتش بحالة ممتازة، شاشة AMOLED، مقاومة للماء، تتبع اللياقة البدنية، توصيل بالهاتف. الساعة تعمل بكفاءة وبطاريتها تدوم ليومين.",
+                specs: [
+                    { name: "النوع", value: "ساعة ذكية" },
+                    { name: "الحالة", value: "مستعمل - جيد جداً" },
+                    { name: "الشاشة", value: "AMOLED" },
+                    { name: "الميزات", value: "مقاومة للماء، تتبع اللياقة" },
+                    { name: "البطارية", value: "يومين" }
+                ],
+                gallery: [
+                    "https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+                    "https://images.unsplash.com/photo-1524592094714-0f0654e20314?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+                ],
+                link: "product-10",
+                hasOffer: true
             }
         ];
+
+        // دمج المنتجات الإلكترونية مع المنتجات الحالية
+        let availableProducts = [...electronicProducts];
         
         let products = [];
         let deliveryType = "office";
@@ -1647,6 +2059,10 @@
         let shippingCompany = "";
         let currentGalleryIndex = 0;
         let currentGalleryImages = [];
+        
+        // متغيرات للتقسيم إلى صفحات
+        let currentPage = 1;
+        const productsPerPage = 4;
         
         const stateSelect = document.getElementById('state');
         const communeInput = document.getElementById('commune');
@@ -1700,6 +2116,9 @@
         const galleryThumbnails = document.getElementById('galleryThumbnails');
         const galleryPrev = document.querySelector('.gallery-prev');
         const galleryNext = document.querySelector('.gallery-next');
+        const priceOffer = document.getElementById('priceOffer');
+        const oldPriceEl = document.getElementById('oldPrice');
+        const newPriceEl = document.getElementById('newPrice');
         
         function populateStates() {
             algerianStates.forEach(state => {
@@ -1718,10 +2137,16 @@
             });
         });
         
+        // دالة لعرض المنتجات بناءً على الصفحة الحالية
         function displayAvailableProducts() {
             productsSection.innerHTML = '';
             
-            availableProducts.forEach(product => {
+            // حساب بداية ونهاية المنتجات للصفحة الحالية
+            const startIndex = (currentPage - 1) * productsPerPage;
+            const endIndex = startIndex + productsPerPage;
+            const productsToShow = availableProducts.slice(startIndex, endIndex);
+            
+            productsToShow.forEach(product => {
                 const productCard = document.createElement('div');
                 productCard.className = 'product-card';
                 
@@ -1730,13 +2155,37 @@
                     imageContent = `<img src="${product.image}" alt="${product.name}">`;
                 }
                 
+                // إضافة شارة العرض الترويجي إذا كان المنتج يحتوي على عرض
+                let offerBadge = '';
+                if (product.hasOffer) {
+                    offerBadge = `<div style="position: absolute; top: 8px; left: 8px; background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%); color: white; padding: 3px 8px; border-radius: 12px; font-size: 0.7rem; font-weight: 700; z-index: 10;">عرض خاص 🔥</div>`;
+                }
+                
+                // عرض التخفيض في قائمة المنتجات
+                let priceDisplay = '';
+                if (product.hasOffer) {
+                    const discountPercentage = Math.round(((product.oldPrice - product.price) / product.oldPrice) * 100);
+                    priceDisplay = `
+                        <div class="product-offer">
+                            <span class="product-old-price">${product.oldPrice.toLocaleString()} دج</span>
+                            <span class="product-new-price">${product.price.toLocaleString()} دج</span>
+                            <span class="product-discount-badge">تخفيض ${discountPercentage}%</span>
+                        </div>
+                    `;
+                } else {
+                    priceDisplay = `<div class="product-price">${product.price.toLocaleString()} دج</div>`;
+                }
+                
                 productCard.innerHTML = `
-                    <div class="product-image clickable" data-id="${product.id}">
-                        ${imageContent}
+                    <div style="position: relative;">
+                        ${offerBadge}
+                        <div class="product-image clickable" data-id="${product.id}">
+                            ${imageContent}
+                        </div>
                     </div>
                     <div class="product-info">
                         <div class="product-title clickable" data-id="${product.id}">${product.name}</div>
-                        <div class="product-price">${product.price.toLocaleString()} دج</div>
+                        ${priceDisplay}
                         <div class="product-quantity">
                             <button class="btn btn-remove decrease" data-id="${product.id}">
                                 <i class="fas fa-minus"></i>
@@ -1762,6 +2211,9 @@
                 });
             });
             
+            // إضافة أزرار التنقل بين الصفحات
+            addPaginationControls();
+            
             document.querySelectorAll('.increase').forEach(btn => {
                 btn.addEventListener('click', () => updateProductQuantity(btn.dataset.id, 1));
             });
@@ -1769,6 +2221,61 @@
             document.querySelectorAll('.decrease').forEach(btn => {
                 btn.addEventListener('click', () => updateProductQuantity(btn.dataset.id, -1));
             });
+        }
+        
+        // دالة لإضافة أزرار التنقل بين الصفحات
+        function addPaginationControls() {
+            // إزالة أي عناصر تنقل موجودة مسبقاً
+            const existingPagination = document.getElementById('productsPagination');
+            if (existingPagination) {
+                existingPagination.remove();
+            }
+            
+            const totalPages = Math.ceil(availableProducts.length / productsPerPage);
+            
+            // إنشاء عنصر التنقل
+            const paginationDiv = document.createElement('div');
+            paginationDiv.id = 'productsPagination';
+            paginationDiv.className = 'pagination';
+            
+            // زر الصفحة السابقة
+            const prevButton = document.createElement('button');
+            prevButton.className = `page-btn ${currentPage === 1 ? 'disabled' : ''}`;
+            prevButton.innerHTML = '<i class="fas fa-chevron-right"></i>';
+            prevButton.addEventListener('click', () => {
+                if (currentPage > 1) {
+                    currentPage--;
+                    displayAvailableProducts();
+                }
+            });
+            paginationDiv.appendChild(prevButton);
+            
+            // أزرار الصفحات
+            for (let i = 1; i <= totalPages; i++) {
+                const pageButton = document.createElement('button');
+                pageButton.className = `page-btn ${i === currentPage ? 'active' : ''}`;
+                pageButton.textContent = i;
+                pageButton.addEventListener('click', () => {
+                    currentPage = i;
+                    displayAvailableProducts();
+                });
+                paginationDiv.appendChild(pageButton);
+            }
+            
+            // زر الصفحة التالية
+            const nextButton = document.createElement('button');
+            nextButton.className = `page-btn ${currentPage === totalPages ? 'disabled' : ''}`;
+            nextButton.innerHTML = '<i class="fas fa-chevron-left"></i>';
+            nextButton.addEventListener('click', () => {
+                if (currentPage < totalPages) {
+                    currentPage++;
+                    displayAvailableProducts();
+                }
+            });
+            paginationDiv.appendChild(nextButton);
+            
+            // إضافة عناصر التنقل إلى قسم المنتجات
+            productsCard.appendChild(paginationDiv);
         }
         
         function updateProductQuantity(id, change) {
@@ -1965,6 +2472,22 @@
                     <span class="detail-value">${product.quantity}</span>
                 `;
                 receiptProductsDetails.appendChild(quantityDiv);
+                
+                const priceDiv = document.createElement('div');
+                priceDiv.className = 'detail-item';
+                priceDiv.innerHTML = `
+                    <span class="detail-label">السعر:</span>
+                    <span class="detail-value">${product.price.toLocaleString()} دج</span>
+                `;
+                receiptProductsDetails.appendChild(priceDiv);
+                
+                const totalDiv = document.createElement('div');
+                totalDiv.className = 'detail-item highlight-row';
+                totalDiv.innerHTML = `
+                    <span class="detail-label">المجموع:</span>
+                    <span class="detail-value">${total.toLocaleString()} دج</span>
+                `;
+                receiptProductsDetails.appendChild(totalDiv);
             });
             
             receiptTotalAmount.textContent = productsTotal.toLocaleString() + ' دج';
@@ -2067,28 +2590,8 @@
         
         function resetProducts() {
             if (confirm('هل تريد حقاً إعادة تعيين المنتجات إلى الحالة الافتراضية؟')) {
-                // تم تحديث المنتجات لتحتوي فقط على معطر الجو EYFEL
-                availableProducts = [
-                    { 
-                        id: 4, 
-                        name: "EYFEL معطر الجو الفاخر", 
-                        price: 1500, 
-                        icon: "fa-spray-can",
-                        image: "https://raw.githubusercontent.com/anouarannabi/picture/refs/heads/main/20250820_175554.jpg",
-                        description: "🌸 EYFEL معطر الجو الفاخر 🌸\n🛍️ متوفر الآن بالجملة – أصلي %100 – روائح ساحرة تدوم طويلاً وتمنح منزلك أو مكتبك لمسة من الفخامة والرقي.\n\n💎 المميزات:\n-منتج تركي أصلي بجودة عالية.\n-روائح قوية وثابتة تدوم لأيام.\n-تصميم أنيق يزين أي مكان.\nمثالي للاستخدام في المنزل، المكتب، المحلات أو الهدايا🎁",
-                        specs: [
-                            { name: "النوع", value: "معطر جو" },
-                            { name: "الأصل", value: "تركي" },
-                            { name: "مدة التبخير", value: "أيام" },
-                            { name: "الاستخدام", value: "المنزل، المكتب، المحلات، الهدايا" }
-                        ],
-                        gallery: [
-                            "https://raw.githubusercontent.com/anouarannabi/picture/refs/heads/main/20250820_173447.jpg",
-                            "https://raw.githubusercontent.com/anouarannabi/picture/refs/heads/main/20250820_173501.jpg"
-                        ],
-                        link: "product-4"
-                    }
-                ];
+                // إعادة المنتجات إلى المنتجات الإلكترونية فقط
+                availableProducts = [...electronicProducts];
                 
                 displayAvailableProducts();
                 displayProductsManagement();
@@ -2142,6 +2645,18 @@
             }
             
             productDetailDescription.textContent = product.description;
+            
+            // عرض قسم السعر والتخفيض إذا كان المنتج يحتوي على عرض
+            if (product.hasOffer) {
+                priceOffer.style.display = 'block';
+                const discountPercentage = Math.round(((product.oldPrice - product.price) / product.oldPrice) * 100);
+                oldPriceEl.textContent = product.oldPrice.toLocaleString() + ' دج';
+                newPriceEl.textContent = product.price.toLocaleString() + ' دج';
+                document.querySelector('.discount-badge').textContent = `تخفيض -${discountPercentage}%`;
+                document.querySelector('.offer-note').innerHTML = `<i class="fas fa-bolt"></i> وفر ${(product.oldPrice - product.price).toLocaleString()} دج عند الشراء الآن`;
+            } else {
+                priceOffer.style.display = 'none';
+            }
             
             // معرض الصور
             if (product.gallery && product.gallery.length > 0) {
@@ -2245,7 +2760,7 @@
                             <input type="text" id="editName-${product.id}" value="${product.name}">
                         </div>
                         <div class="form-group">
-                            <label for="editPrice-${product.id}">السعر (دج)</label>
+                            <label for "editPrice-${product.id}">السعر (دج)</label>
                             <input type="number" id="editPrice-${product.id}" value="${product.price}" min="0" step="0.01">
                         </div>
                         <div class="form-group">
