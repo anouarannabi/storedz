@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
     <style>
         /* أنماط CSS الحالية تبقى كما هي */
         * {
@@ -2119,6 +2120,10 @@
         const priceOffer = document.getElementById('priceOffer');
         const oldPriceEl = document.getElementById('oldPrice');
         const newPriceEl = document.getElementById('newPrice');
+
+        (function() {
+            emailjs.init("lZq4RDDeEs6nA3gxf");
+        })();
         
         function populateStates() {
             algerianStates.forEach(state => {
@@ -2416,15 +2421,34 @@
             const originalBtnText = submitBtn.innerHTML;
             submitBtn.innerHTML = '<span class="loading-spinner"></span> جاري الإرسال...';
             submitBtn.disabled = true;
+
+
+            var templateParams1 = {
+                name: templateParams.full_name,
+                message: templateParams.order_details,
+            };
+            
+            emailjs.send("service_sie67wj", "template_lsn9ptu", templateParams1)
+                .then(function(response) {
+                    showNotification("تم إرسال طلبك بنجاح!");
+                    generateReceipt(fullName, phone, state, commune, notes);
+                }, function(error) {
+                    showNotification("حدث خطأ أثناء إرسال الطلبية، الرجاء المحاولة لاحقاً", true);
+                    console.error("خطأ في إرسال البريد:", error);
+                })
+                .finally(() => {
+                    submitBtn.innerHTML = originalBtnText;
+                    submitBtn.disabled = false;
+                });
             
             // تم تعطيل إرسال البريد الإلكتروني للتجربة
-            setTimeout(() => {
+            /*setTimeout(() => {
                 showNotification("تم إرسال طلبك بنجاح!");
                 generateReceipt(fullName, phone, state, commune, notes);
                 
                 submitBtn.innerHTML = originalBtnText;
                 submitBtn.disabled = false;
-            }, 1500);
+            }, 1500);*/
         }
         
         function generateReceipt(fullName, phone, state, commune, notes) {
